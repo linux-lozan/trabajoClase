@@ -1,1 +1,3 @@
-prueba
+git add .
+git commit -m "Actualización del trabajo"
+git push
