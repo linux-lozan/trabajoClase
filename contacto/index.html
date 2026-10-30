@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AdiTech Events · Gestión de eventos tecnológicos</title>
+  <meta name="description" content="AdiTech Events desarrolla y comercializa aplicaciones web para organizar y gestionar eventos tecnológicos." />
+  <link rel="icon" type="image/png" href="Imagen1.png" />
+  <link rel="stylesheet" href="css/estilos.css" />
+</head>
+<body data-pagina="inicio">
+  <header id="cabecera" class="cabecera"></header>
+
+  <main>
+    <section class="hero">
+      <div class="contenedor hero-grid">
+        <div>
+          <p class="etiqueta">Software para eventos tecnológicos</p>
+          <h1>Organiza tu evento tech <span class="resaltado">sin perder el control</span></h1>
+          <p class="lead">AdiTech Events es la plataforma web para gestionar charlas, ponentes, salas, reservas de asistentes y validación de entradas con código QR. Todo desde el navegador.</p>
+          <div class="acciones">
+            <a href="charlas.html" class="btn">Ver la agenda</a>
+            <a href="planes.html" class="btn btn-sec">Ver planes</a>
+          </div>
+        </div>
+        <img src="Imagen1.png" alt="Logo de AdiTech Events" class="hero-logo" />
+      </div>
+    </section>
+
+    <div class="contenedor">
+      <div class="stats">
+        <div><strong id="statCharlas">0</strong><small>Charlas</small></div>
+        <div><strong id="statPonentes">0</strong><small>Ponentes</small></div>
+        <div><strong id="statSalas">0</strong><small>Salas</small></div>
+        <div><strong id="statPlazas">0</strong><small>Plazas</small></div>
+      </div>
+    </div>
+
+    <section class="seccion">
+      <div class="contenedor">
+        <h2>Una aplicación, cuatro perfiles</h2>
+        <p class="sub">Cada usuario accede con su rol y ve solo lo que necesita.</p>
+        <div class="rejilla-4">
+          <article class="tarjeta"><div class="icono">🛡️</div><h3>Administrador</h3><p>Gestión completa del sistema: usuarios, roles, salas y configuración.</p></article>
+          <article class="tarjeta"><div class="icono">🗓️</div><h3>Organizador</h3><p>Crea y publica charlas, asigna ponentes y salas, y controla el aforo.</p></article>
+          <article class="tarjeta"><div class="icono">📷</div><h3>Personal</h3><p>Valida la entrada de los asistentes escaneando su código QR.</p></article>
+          <article class="tarjeta"><div class="icono">🎟️</div><h3>Asistente</h3><p>Consulta la agenda, reserva plaza y recibe confirmación por email.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="seccion alt">
+      <div class="contenedor">
+        <h2>¿Por qué AdiTech Events?</h2>
+        <p class="sub">Pensado para meetups, congresos, hackathons y jornadas universitarias.</p>
+        <div class="rejilla-3">
+          <article class="tarjeta"><div class="icono">📊</div><h3>Control de aforo</h3><p>Las reservas se bloquean automáticamente al completarse la capacidad de cada charla.</p></article>
+          <article class="tarjeta"><div class="icono">✉️</div><h3>Notificaciones</h3><p>Emails automáticos de confirmación, cancelación y recordatorio para cada asistente.</p></article>
+          <article class="tarjeta"><div class="icono">🔒</div><h3>Sin duplicados</h3><p>Cada usuario solo puede tener una reserva activa por charla, garantizado por la base de datos.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="seccion">
+      <div class="contenedor cta">
+        <h2>¿Preparas tu próximo evento?</h2>
+        <p>Te enseñamos la plataforma en funcionamiento con una demo personalizada.</p>
+        <a href="contacto.html" class="btn">Solicitar demo</a>
+      </div>
+    </section>
+  </main>
+
+  <footer id="pie" class="pie"></footer>
+  <script src="js/datos.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
