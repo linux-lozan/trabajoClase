@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AdiTech Events · Gestión de eventos tecnológicos</title>
+  <meta name="description" content="AdiTech Events desarrolla y comercializa aplicaciones web para organizar y gestionar eventos tecnológicos." />
+  <link rel="icon" type="image/png" href="Imagen1.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=Instrument+Serif:ital@0;1&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/estilos.css" />
+</head>
+<body data-pagina="inicio">
+  <header id="cabecera" class="cabecera"></header>
+
+  <main>
+    <section class="hero">
+      <div class="contenedor">
+        <div class="hero-top">
+          <p class="mono">(Software para eventos tecnológicos)</p>
+          <p class="mono" id="heroFechas">Edición 2026</p>
+        </div>
+
+        <h1 class="hero-titulo">
+          <span class="linea"><span>Organiza tu evento</span></span>
+          <span class="linea sangria"><span>tech <em>sin perder</em></span></span>
+          <span class="linea"><span>el control.</span></span>
+        </h1>
+
+        <div class="hero-pie">
+          <img src="Imagen1.png" alt="Logo de AdiTech Events" class="hero-logo" />
+          <p class="lead">Charlas, ponentes, salas, reservas y validación de entradas con código QR. Todo desde el navegador, sin hojas de cálculo de por medio.</p>
+          <div class="acciones">
+            <a href="charlas.html" class="btn">Ver la agenda <span class="flecha-btn" aria-hidden="true">→</span></a>
+            <a href="planes.html" class="enlace">Ver planes</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="cinta-marquee" aria-hidden="true">
+      <div class="pista">
+        <span>Meetups</span><span class="sep">/</span><span><em>congresos</em></span><span class="sep">/</span><span>Hackathons</span><span class="sep">/</span><span><em>jornadas universitarias</em></span><span class="sep">/</span><span>Reservas</span><span class="sep">/</span><span><em>entradas QR</em></span><span class="sep">/</span>
+        <span>Meetups</span><span class="sep">/</span><span><em>congresos</em></span><span class="sep">/</span><span>Hackathons</span><span class="sep">/</span><span><em>jornadas universitarias</em></span><span class="sep">/</span><span>Reservas</span><span class="sep">/</span><span><em>entradas QR</em></span><span class="sep">/</span>
+      </div>
+    </div>
+
+    <div class="stats">
+      <div><strong id="statCharlas">0</strong><small>Charlas publicadas</small></div>
+      <div><strong id="statPonentes">0</strong><small>Ponentes</small></div>
+      <div><strong id="statSalas">0</strong><small>Salas</small></div>
+      <div><strong id="statPlazas">0</strong><small>Plazas en total</small></div>
+    </div>
+
+    <section class="seccion">
+      <div class="contenedor">
+        <header class="sec-cab aparece">
+          <span class="mono">01 — Perfiles</span>
+          <h2>Una aplicación, <em>cuatro</em> perfiles</h2>
+          <p>Cada usuario entra con su rol y ve solo lo que necesita. Nada más.</p>
+        </header>
+
+        <ol class="filas">
+          <li class="fila aparece">
+            <span class="fila-num">(A)</span>
+            <h3>Administrador</h3>
+            <p>Gestión completa del sistema: usuarios, roles, salas y configuración.</p>
+            <span class="fila-flecha" aria-hidden="true">↗</span>
+          </li>
+          <li class="fila aparece">
+            <span class="fila-num">(B)</span>
+            <h3>Organizador</h3>
+            <p>Crea y publica charlas, asigna ponentes y salas, y controla el aforo.</p>
+            <span class="fila-flecha" aria-hidden="true">↗</span>
+          </li>
+          <li class="fila aparece">
+            <span class="fila-num">(C)</span>
+            <h3>Personal</h3>
+            <p>Valida la entrada de los asistentes escaneando su código QR en la puerta.</p>
+            <span class="fila-flecha" aria-hidden="true">↗</span>
+          </li>
+          <li class="fila aparece">
+            <span class="fila-num">(D)</span>
+            <h3>Asistente</h3>
+            <p>Consulta la agenda, reserva plaza y recibe la confirmación por email.</p>
+            <span class="fila-flecha" aria-hidden="true">↗</span>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="seccion oscura">
+      <div class="contenedor partida">
+        <div class="partida-fija">
+          <span class="mono">02 — Por qué AdiTech</span>
+          <h2>Hecho para quien <em>organiza</em>, no para quien vende</h2>
+          <p>Pensado para meetups, congresos, hackathons y jornadas universitarias, donde cada plaza cuenta.</p>
+        </div>
+
+        <ol class="puntos">
+          <li class="aparece">
+            <span class="mono">i.</span>
+            <h3>Control de aforo</h3>
+            <p>Las reservas se bloquean solas en cuanto una charla llena su capacidad. Ni una silla de más.</p>
+          </li>
+          <li class="aparece">
+            <span class="mono">ii.</span>
+            <h3>Notificaciones</h3>
+            <p>Emails automáticos de confirmación, cancelación y recordatorio para cada asistente.</p>
+          </li>
+          <li class="aparece">
+            <span class="mono">iii.</span>
+            <h3>Sin duplicados</h3>
+            <p>Cada usuario solo puede tener una reserva activa por charla, y lo garantiza la propia base de datos.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="cierre">
+      <div class="contenedor">
+        <span class="mono">03 — ¿Preparas tu próximo evento?</span>
+        <a href="contacto.html" class="cierre-enlace">
+          <span>Pide una <em>demo</em></span>
+          <span class="flecha-grande" aria-hidden="true">→</span>
+        </a>
+        <p>Te enseñamos la plataforma funcionando con los datos de tu evento. Sin compromiso.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer id="pie" class="pie"></footer>
+  <script src="js/datos.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
