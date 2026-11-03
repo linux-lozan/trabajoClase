@@ -1,0 +1,4 @@
+docker compose exec db mysql -u root -p  (cambia root por usuario)
+
+usuarios ADI_user adi123
+         root     Aula_Root_2026

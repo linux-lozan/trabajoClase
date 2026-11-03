@@ -1,0 +1,17 @@
+CREATE USER IF NOT EXISTS 'ADI_user'@'localhost'
+IDENTIFIED BY 'adi123';
+
+ALTER USER 'ADI_user'@'localhost'
+IDENTIFIED BY 'adi123';
+
+CREATE USER IF NOT EXISTS 'ADI_user'@'%'
+IDENTIFIED BY 'adi123';
+
+ALTER USER 'ADI_user'@'%'
+IDENTIFIED BY 'adi123';
+
+GRANT ALL PRIVILEGES ON sabitech.* TO 'ADI_user'@'localhost';
+
+GRANT ALL PRIVILEGES ON sabitech.* TO 'ADI_user'@'%';
+
+FLUSH PRIVILEGES;
