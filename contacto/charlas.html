@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Charlas · AdiTech Events</title>
+  <link rel="icon" type="image/png" href="Imagen1.png" />
+  <link rel="stylesheet" href="css/estilos.css" />
+</head>
+<body data-pagina="charlas">
+  <header id="cabecera" class="cabecera"></header>
+
+  <main>
+    <section class="cab-pagina">
+      <div class="contenedor">
+        <p class="etiqueta">Agenda</p>
+        <h1>Charlas</h1>
+        <p>Filtra, consulta y reserva tu plaza en las charlas publicadas.</p>
+      </div>
+    </section>
+
+    <section class="seccion">
+      <div class="contenedor">
+        <div class="filtros">
+          <input type="search" id="buscador" placeholder="Buscar por título o ponente..." />
+          <select id="filtroFecha"><option value="">Todas las fechas</option></select>
+          <select id="filtroSala"><option value="">Todas las salas</option></select>
+        </div>
+        <div id="listaCharlas" class="rejilla-3"></div>
+        <p id="sinResultados" class="oculto centrado">No hay charlas que coincidan con la búsqueda.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer id="pie" class="pie"></footer>
+  <script src="js/datos.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

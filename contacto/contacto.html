@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contacto · AdiTech Events</title>
+  <link rel="icon" type="image/png" href="Imagen1.png" />
+  <link rel="stylesheet" href="css/estilos.css" />
+</head>
+<body data-pagina="contacto">
+  <header id="cabecera" class="cabecera"></header>
+
+  <main>
+    <section class="cab-pagina">
+      <div class="contenedor">
+        <p class="etiqueta">Hablemos</p>
+        <h1>Contacto</h1>
+        <p>Cuéntanos qué evento preparas y te ayudamos a organizarlo.</p>
+      </div>
+    </section>
+
+    <section class="seccion">
+      <div class="contenedor contacto-grid">
+        <div class="contacto-info">
+          <h2>Estamos a tu disposición</h2>
+          <p>¿Organizas un evento tecnológico? Te preparamos una demo personalizada de la plataforma sin compromiso.</p>
+          <p>📧 info@aditech.es</p>
+          <p>📞 +34 900 000 000</p>
+          <p>📍 Proyecto final · 2º DAW</p>
+        </div>
+        <form id="formContacto" class="formulario caja" novalidate>
+          <label>Nombre <input type="text" name="nombre" required /></label>
+          <label>Email <input type="email" name="email" required /></label>
+          <label>Tipo de evento
+            <select name="tipo">
+              <option>Meetup</option><option>Congreso</option><option>Hackathon</option><option>Jornada universitaria</option><option>Otro</option>
+            </select>
+          </label>
+          <label>Mensaje <textarea name="mensaje" rows="5" required></textarea></label>
+          <button class="btn" type="submit">Enviar mensaje</button>
+          <p class="msg-form" id="msgContacto"></p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer id="pie" class="pie"></footer>
+  <script src="js/datos.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
