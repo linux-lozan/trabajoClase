@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AdiTech Events · Gestión de eventos tecnológicos</title>
+  <meta name="description" content="AdiTech Events desarrolla y comercializa aplicaciones web para organizar y gestionar eventos tecnológicos." />
+  <link rel="icon" type="image/png" href="Imagen1.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" />
+  <link rel="stylesheet" href="css/estilos.css" />
+</head>
+<body data-pagina="inicio">
+  <header id="cabecera" class="cabecera"></header>
+
+  <main>
+    <section class="hero">
+      <div class="contenedor hero-grid">
+        <div>
+          <p class="etiqueta">Software para eventos tecnológicos</p>
+          <h1>Organiza tu evento tech <span class="resaltado">sin perder el control</span></h1>
+          <p class="lead">AdiTech Events es la plataforma web para gestionar charlas, ponentes, salas, reservas de asistentes y validación de entradas con código QR. Todo desde el navegador.</p>
+          <div class="acciones">
+            <a href="charlas.html" class="btn">Ver la agenda</a>
+            <a href="planes.html" class="btn btn-sec">Ver planes</a>
+          </div>
+        </div>
+        <div class="hero-visual">
+          <div class="logo3d" id="logo3d" role="img" aria-label="Logo de ADITech">
+            <div class="logo3d-tilt"><div class="logo3d-giro"><div class="logo3d-cuerpo">
+              <!-- Cara frontal: efectos.js la clona hacia atrás para darle volumen -->
+              <svg class="capa frente" viewBox="0 0 200 220" aria-hidden="true">
+                <defs>
+                  <linearGradient id="l3-cara" x1="0" y1="0" x2="1" y2="1">
+                    <stop offset="0" stop-color="#3a63e0" /><stop offset=".55" stop-color="#1a3fae" /><stop offset="1" stop-color="#122f8a" />
+                  </linearGradient>
+                  <linearGradient id="l3-luz" x1="0" y1="0" x2="1" y2="0">
+                    <stop offset="0" stop-color="#fff" stop-opacity="0" /><stop offset=".5" stop-color="#fff" stop-opacity=".75" /><stop offset="1" stop-color="#fff" stop-opacity="0" />
+                  </linearGradient>
+                  <mask id="l3-forma" maskUnits="userSpaceOnUse" x="0" y="0" width="200" height="220">
+                    <path d="M88 16H112L152 128H126L100 58L74 128H48Z" fill="#fff" stroke="#fff" stroke-width="5" stroke-linejoin="round" />
+                    <rect x="70" y="64" width="60" height="48" rx="7" fill="#fff" />
+                    <text x="100" y="178" text-anchor="middle" class="l3-adi" fill="#fff">ADI</text>
+                  </mask>
+                </defs>
+                <path class="s" d="M88 16H112L152 128H126L100 58L74 128H48Z" fill="url(#l3-cara)" stroke="url(#l3-cara)" stroke-width="5" stroke-linejoin="round" />
+                <rect class="s" x="70" y="64" width="60" height="48" rx="7" fill="#1e48c4" stroke="#fff" stroke-width="3" />
+                <g class="detalle">
+                  <rect x="70" y="64" width="60" height="12" rx="6" fill="#29b6f0" />
+                  <rect x="83" y="58" width="6" height="12" rx="3" fill="#0b1d55" /><rect x="111" y="58" width="6" height="12" rx="3" fill="#0b1d55" />
+                  <g fill="#fff">
+                    <rect x="77" y="81" width="9" height="9" rx="2" /><rect x="89.5" y="81" width="9" height="9" rx="2" /><rect x="102" y="81" width="9" height="9" rx="2" /><rect x="114.5" y="81" width="9" height="9" rx="2" />
+                    <rect x="77" y="94" width="9" height="9" rx="2" /><rect x="89.5" y="94" width="9" height="9" rx="2" /><rect x="102" y="94" width="9" height="9" rx="2" fill="#29b6f0" /><rect x="114.5" y="94" width="9" height="9" rx="2" />
+                  </g>
+                </g>
+                <text class="s l3-adi" x="100" y="178" text-anchor="middle" fill="url(#l3-cara)">ADI</text>
+                <g class="brillo" mask="url(#l3-forma)"><rect class="barrido" x="-60" y="0" width="60" height="220" fill="url(#l3-luz)" /></g>
+              </svg>
+              <!-- «Tech», un poco por delante -->
+              <svg class="capa tech" viewBox="0 0 200 220" aria-hidden="true">
+                <line x1="30" y1="200" x2="66" y2="200" /><line x1="134" y1="200" x2="170" y2="200" />
+                <text x="100" y="208" text-anchor="middle">Tech</text>
+              </svg>
+              <!-- Red de nodos, flotando por delante del logo -->
+              <svg class="capa red" viewBox="0 0 200 220" aria-hidden="true">
+                <g class="enlaces">
+                  <path d="M146 30L166 16L186 28L178 50L156 54Z" /><path d="M146 30L168 35L186 28M166 16L168 35L178 50M156 54L168 35" />
+                </g>
+                <circle class="nodo" cx="146" cy="30" r="4.2" /><circle class="nodo" cx="166" cy="16" r="3.6" /><circle class="nodo" cx="186" cy="28" r="4.2" />
+                <circle class="nodo" cx="178" cy="50" r="3.6" /><circle class="nodo" cx="156" cy="54" r="4" /><circle class="nodo central" cx="168" cy="35" r="5" />
+              </svg>
+            </div></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="marquesina" aria-hidden="true">
+      <div class="pista">
+        <span>Meetups<em>✦</em>Congresos<em>✦</em>Hackathons<em>✦</em>Jornadas universitarias<em>✦</em>Entradas con QR<em>✦</em>Control de aforo<em>✦</em></span>
+        <span>Meetups<em>✦</em>Congresos<em>✦</em>Hackathons<em>✦</em>Jornadas universitarias<em>✦</em>Entradas con QR<em>✦</em>Control de aforo<em>✦</em></span>
+      </div>
+    </div>
+
+    <div class="contenedor">
+      <div class="stats">
+        <div><strong id="statCharlas">0</strong><small>Charlas</small></div>
+        <div><strong id="statPonentes">0</strong><small>Ponentes</small></div>
+        <div><strong id="statSalas">0</strong><small>Salas</small></div>
+        <div><strong id="statPlazas">0</strong><small>Plazas</small></div>
+      </div>
+    </div>
+
+    <section class="seccion">
+      <div class="contenedor">
+        <h2>Una aplicación, cuatro perfiles</h2>
+        <p class="sub">Cada usuario accede con su rol y ve solo lo que necesita.</p>
+        <div class="rejilla-4">
+          <article class="tarjeta"><div class="icono">🛡️</div><h3>Administrador</h3><p>Gestión completa del sistema: usuarios, roles, salas y configuración.</p></article>
+          <article class="tarjeta"><div class="icono">🗓️</div><h3>Organizador</h3><p>Crea y publica charlas, asigna ponentes y salas, y controla el aforo.</p></article>
+          <article class="tarjeta"><div class="icono">📷</div><h3>Personal</h3><p>Valida la entrada de los asistentes escaneando su código QR.</p></article>
+          <article class="tarjeta"><div class="icono">🎟️</div><h3>Asistente</h3><p>Consulta la agenda, reserva plaza y recibe confirmación por email.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="seccion alt">
+      <div class="contenedor">
+        <h2>¿Por qué AdiTech Events?</h2>
+        <p class="sub">Pensado para meetups, congresos, hackathons y jornadas universitarias.</p>
+        <div class="rejilla-3">
+          <article class="tarjeta"><div class="icono">📊</div><h3>Control de aforo</h3><p>Las reservas se bloquean automáticamente al completarse la capacidad de cada charla.</p></article>
+          <article class="tarjeta"><div class="icono">✉️</div><h3>Notificaciones</h3><p>Emails automáticos de confirmación, cancelación y recordatorio para cada asistente.</p></article>
+          <article class="tarjeta"><div class="icono">🔒</div><h3>Sin duplicados</h3><p>Cada usuario solo puede tener una reserva activa por charla, garantizado por la base de datos.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="seccion">
+      <div class="contenedor cta">
+        <h2>¿Preparas tu próximo evento?</h2>
+        <p>Te enseñamos la plataforma en funcionamiento con una demo personalizada.</p>
+        <a href="contacto.html" class="btn">Solicitar demo</a>
+      </div>
+    </section>
+  </main>
+
+  <footer id="pie" class="pie"></footer>
+  <script src="js/datos.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/efectos.js"></script>
+</body>
+</html>
