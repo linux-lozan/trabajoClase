@@ -1,6 +1,3 @@
--- Esquema de sabitech basado en el SQL proporcionado.
--- Se han eliminado ponentes y charla_ponente, junto con sus índices y FK.
--- Ejecutar sobre la base de datos sabitech.
 
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
