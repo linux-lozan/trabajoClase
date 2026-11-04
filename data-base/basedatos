@@ -1,7 +1,5 @@
 docker compose exec db mysql -u root -p  (cambia root por usuario)
 
-docker compose up -d db
-
 usuarios ADI_user adi123
          root     6Aula_Root_202
 
