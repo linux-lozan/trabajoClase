@@ -3,10 +3,8 @@
 namespace Database\Seeders;
 
 use App\Models\Role;
-use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
@@ -17,21 +15,13 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        $role = Role::firstOrCreate(
-            ['nombre' => 'administrador'],
-            ['descripcion' => 'Gestión completa del sistema'],
-        );
-
-        User::firstOrCreate(
-            ['email' => 'test@example.com'],
-            [
-                'id_rol' => $role->id_rol,
-                'nombre' => 'Test',
-                'apellidos' => 'User',
-                'password_hash' => Hash::make('password'),
-                'fecha_registro' => now(),
-                'activo' => true,
-            ],
-        );
+        foreach ([
+            ['nombre' => 'administrador', 'descripcion' => 'Gestión completa del sistema'],
+            ['nombre' => 'organizador', 'descripcion' => 'Crea y gestiona charlas'],
+            ['nombre' => 'personal', 'descripcion' => 'Valida la entrada mediante QR'],
+            ['nombre' => 'asistente', 'descripcion' => 'Usuario que reserva plaza en charlas'],
+        ] as $role) {
+            Role::query()->firstOrCreate(['nombre' => $role['nombre']], ['descripcion' => $role['descripcion']]);
+        }
     }
 }
