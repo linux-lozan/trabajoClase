@@ -4,7 +4,6 @@
    · Titulares que suben palabra a palabra
    · Aparición de bloques al hacer scroll
    · Cabecera que se esconde al bajar
-   · Cursor que reacciona a los enlaces
    Se carga después de app.js y no cambia su lógica.
    ========================================================= */
 (() => {
@@ -165,24 +164,4 @@
     cab.classList.toggle("escondida", y > ultimoY && y > 140 && !menuAbierto);
     ultimoY = y;
   }, { passive: true });
-
-  // ---------- Cursor (solo ratón) ----------
-  if (!reducido && matchMedia("(pointer: fine)").matches) {
-    const cursor = document.createElement("div");
-    cursor.className = "cursor oculto-cursor";
-    document.body.appendChild(cursor);
-    let x = innerWidth / 2, y = innerHeight / 2, cx = x, cy = y;
-    addEventListener("pointermove", (e) => {
-      x = e.clientX; y = e.clientY;
-      cursor.classList.remove("oculto-cursor");
-      cursor.classList.toggle("grande", !!e.target.closest("a, button, .tarjeta, select, label"));
-    });
-    document.addEventListener("pointerleave", () => cursor.classList.add("oculto-cursor"));
-    const seguir = () => {
-      cx += (x - cx) * 0.2; cy += (y - cy) * 0.2;
-      cursor.style.transform = `translate(${cx}px, ${cy}px)`;
-      requestAnimationFrame(seguir);
-    };
-    seguir();
-  }
 })();

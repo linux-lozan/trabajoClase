@@ -6,7 +6,6 @@
    · Grids (Obys): retícula estricta, titulares enormes a -0.05em.
    · Forge Automotive: índices «(01)», cinta infinita y logotipo gigante en el pie.
    · MECHA: cifra grande sobre pie pequeño y etiquetas en mayúsculas espaciadas.
-   · G. Colombel: cursor que reacciona a los enlaces.
    Colores de marca del logo: azul marino + celeste.
    ===================================================================== */
 :root {
@@ -397,13 +396,6 @@ tr:hover td { background: rgba(41, 182, 240, .05); }
 .cortina .cuenta { font: 500 clamp(4rem, 14vw, 12rem)/.8 var(--sans); letter-spacing: -.07em; font-variant-numeric: tabular-nums; }
 .cortina .marca { font: italic 400 clamp(1.4rem, 3vw, 2.4rem) var(--serif); color: var(--celeste); }
 
-/* Cursor que se agranda sobre los enlaces (solo con ratón) */
-.cursor { position: fixed; left: 0; top: 0; z-index: 350; width: 12px; height: 12px; margin: -6px 0 0 -6px; border-radius: 50%;
-  background: var(--papel); mix-blend-mode: difference; pointer-events: none;
-  transition: width .5s var(--ease), height .5s var(--ease), margin .5s var(--ease), opacity .3s; }
-.cursor.grande { width: 64px; height: 64px; margin: -32px 0 0 -32px; }
-.cursor.oculto-cursor { opacity: 0; }
-
 /* ---------- Responsive ---------- */
 @media (max-width: 860px) {
   .menu-btn { display: block; }
@@ -423,7 +415,6 @@ tr:hover td { background: rgba(41, 182, 240, .05); }
   .pie-grid { flex-direction: column; text-align: center; }
   .pie nav { flex-wrap: wrap; justify-content: center; }
 }
-@media (pointer: coarse) { .cursor { display: none; } }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; }
   .revelar { opacity: 1; transform: none; }
