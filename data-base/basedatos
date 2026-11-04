@@ -2,6 +2,8 @@ docker compose exec db mysql -u root -p  (cambia root por usuario)
 
 usuarios ADI_user adi123
          root     6Aula_Root_202
+
+         
 docker compose exec db mysql -u ADI_user -padi123 sabitech -e "SHOW TABLES;" (ver todas las tablas)
 docker compose exec db mysql -u ADI_user -padi123 sabitech -e "DESCRIBE x;" (ver contenido de la tabla cambia x por la tabla)
 
