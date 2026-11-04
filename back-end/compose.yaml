@@ -9,12 +9,13 @@ services:
   db:
     image: mysql:8.4
     environment:
-      MYSQL_DATABASE: sabitech
-      MYSQL_USER: ADI_user
-      MYSQL_PASSWORD: adi123
-      MYSQL_ROOT_PASSWORD: Aula_Root_2026
+      MYSQL_DATABASE: ${DB_DATABASE:-sabitech}
+      MYSQL_USER: ${DB_USERNAME:-ADI_user}
+      MYSQL_PASSWORD: ${DB_PASSWORD:-change-me}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-change-me-root}
     volumes:
       - mysql_data:/var/lib/mysql
+      - ../data-base/sabitech_.sql:/docker-entrypoint-initdb.d/01-sabitech.sql:ro
 
 volumes:
   mysql_data:

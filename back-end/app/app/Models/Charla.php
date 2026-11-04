@@ -5,7 +5,6 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 #[Fillable([
@@ -48,10 +47,5 @@ class Charla extends Model
     public function reservations(): HasMany
     {
         return $this->hasMany(Reserva::class, 'id_charla', 'id_charla');
-    }
-
-    public function ponentes(): BelongsToMany
-    {
-        return $this->belongsToMany(Ponente::class, 'charla_ponente', 'id_charla', 'id_ponente');
     }
 }

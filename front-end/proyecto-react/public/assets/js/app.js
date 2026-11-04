@@ -1,14 +1,21 @@
 /* =========================================================
    AdiTech Events - lógica común a todas las páginas
-   Catálogo, sesión y reservas proceden de la API de Laravel.
+   Los datos se guardan en localStorage para simular la BD.
    ========================================================= */
 
+const CLAVE_BD = "aditech_bd_v2";
+const CLAVE_SESION = "aditech_sesion";
 const PAGINA = document.body.dataset.pagina;
-let bd = {
-  roles: [], usuarios: [], salas: [], ponentes: [], charlas: [],
-  charla_ponente: [], reservas: [], asistencias: [], notificaciones_email: []
-};
-let usuarioSesion = null;
+
+// ---------- "Base de datos" en localStorage ----------
+let bd = cargarBD();
+
+function cargarBD() {
+  const guardada = localStorage.getItem(CLAVE_BD);
+  return guardada ? JSON.parse(guardada) : structuredClone(DB_INICIAL);
+}
+function guardarBD() { localStorage.setItem(CLAVE_BD, JSON.stringify(bd)); }
+function siguienteId(tabla, campo) { return bd[tabla].reduce((max, f) => Math.max(max, f[campo]), 0) + 1; }
 
 // ---------- Utilidades ----------
 const $ = (sel) => document.querySelector(sel);
@@ -19,6 +26,7 @@ function esc(texto) {
 function formatoFecha(iso) {
   return new Date(iso + "T00:00").toLocaleDateString("es-ES", { weekday: "long", day: "numeric", month: "long" });
 }
+function ahora() { return new Date().toISOString().slice(0, 16).replace("T", " "); }
 function codigoReserva(id) { return "ADI-" + String(id).padStart(5, "0"); }
 
 function aviso(texto, error = false) {
@@ -31,50 +39,19 @@ function aviso(texto, error = false) {
 
 // ---------- Consultas (equivalentes a SELECT/JOIN) ----------
 const sala = (id) => bd.salas.find((s) => s.id_sala === id);
-const rolDe = (u) => u?.role?.nombre ?? bd.roles.find((r) => r.id_rol === u?.id_rol)?.nombre ?? "";
+const rolDe = (u) => bd.roles.find((r) => r.id_rol === u.id_rol).nombre;
 const ponentesDe = (idCharla) => bd.charla_ponente
   .filter((cp) => cp.id_charla === idCharla)
-  .map((cp) => bd.ponentes.find((p) => p.id_ponente === cp.id_ponente))
-  .filter(Boolean);
+  .map((cp) => bd.ponentes.find((p) => p.id_ponente === cp.id_ponente));
 const charlasDe = (idPonente) => bd.charla_ponente
   .filter((cp) => cp.id_ponente === idPonente)
-  .map((cp) => bd.charlas.find((c) => c.id_charla === cp.id_charla))
-  .filter(Boolean);
+  .map((cp) => bd.charlas.find((c) => c.id_charla === cp.id_charla));
 const reservasActivas = (idCharla) => bd.reservas.filter((r) => r.id_charla === idCharla && r.estado !== "cancelada");
-const plazasLibres = (c) => c.aforo_maximo - (c.reservas_activas_count ?? reservasActivas(c.id_charla).length);
+const plazasLibres = (c) => c.aforo_maximo - reservasActivas(c.id_charla).length;
 
 function usuarioActual() {
-  return usuarioSesion;
-}
-
-async function cargarDatosServidor() {
-  const [charlas, ponentes, salas, usuario] = await Promise.all([
-    AditechApi.getTalks(),
-    AditechApi.getSpeakers(),
-    AditechApi.getRooms(),
-    AditechApi.getCurrentUser()
-  ]);
-  usuarioSesion = usuario;
-  bd.charlas = charlas;
-  bd.ponentes = ponentes;
-  bd.salas = salas;
-  bd.usuarios = usuario ? [usuario] : [];
-  bd.roles = usuario?.role ? [usuario.role] : [];
-  bd.charla_ponente = ponentes.flatMap((ponente) =>
-    (ponente.charlas || []).map((charla) => ({
-      id_charla: charla.id_charla,
-      id_ponente: ponente.id_ponente
-    }))
-  );
-  bd.reservas = usuario ? await AditechApi.getMyReservations() : [];
-  for (const reservation of bd.reservas) {
-    if (reservation.charla && !bd.charlas.some((talk) => talk.id_charla === reservation.id_charla)) {
-      bd.charlas.push(reservation.charla);
-    }
-  }
-  bd.asistencias = bd.reservas
-    .filter((reserva) => reserva.asistencia)
-    .map((reserva) => ({ id_reserva: reserva.id_reserva }));
+  const id = Number(localStorage.getItem(CLAVE_SESION));
+  return bd.usuarios.find((u) => u.id_usuario === id) || null;
 }
 
 // ---------- Cabecera, pie, modal y aviso (comunes a todas las páginas) ----------
@@ -179,38 +156,46 @@ function pintarCharlas() {
         <h3>${esc(c.titulo)}</h3>
         <p>${esc(c.descripcion)}</p>
         <p class="meta">🎤 ${ponentesDe(c.id_charla).map((p) => `<a href="ponentes.html#ponente-${p.id_ponente}">${esc(p.nombre + " " + p.apellidos)}</a>`).join(", ")}</p>
-        <p class="meta">📍 ${esc(sala(c.id_sala)?.nombre ?? "Sala no disponible")} (${esc(sala(c.id_sala)?.ubicacion ?? "")})</p>
+        <p class="meta">📍 ${esc(sala(c.id_sala).nombre)} (${esc(sala(c.id_sala).ubicacion)})</p>
         <div class="barra ${libres <= 0 ? "llena" : ""}"><span style="width:${ocupacion}%"></span></div>
         <div class="charla-pie"><span class="meta">${Math.max(libres, 0)} de ${c.aforo_maximo} plazas libres</span>${boton}</div>
       </article>`;
   }).join("");
 }
 
-async function reservar(idCharla) {
+function reservar(idCharla) {
   const usuario = usuarioActual();
   if (!usuario) { aviso("Inicia sesión para reservar plaza", true); abrirLogin(); return; }
 
-  try {
-    const reserva = await AditechApi.createReservation(idCharla);
-    await cargarDatosServidor();
-    aviso(`Reserva confirmada: ${codigoReserva(reserva.id_reserva)}`);
-    pintarEstructura();
-    pintarCharlas();
-  } catch (error) {
-    aviso(error.message || "No se pudo guardar la reserva.", true);
-  }
+  const charla = bd.charlas.find((c) => c.id_charla === idCharla);
+  // Mismas reglas que la BD: aforo y una sola reserva activa por usuario y charla
+  if (plazasLibres(charla) <= 0) return aviso("La charla está completa", true);
+  if (reservasActivas(idCharla).some((r) => r.id_usuario === usuario.id_usuario)) return aviso("Ya tienes una reserva para esta charla", true);
+
+  const reserva = { id_reserva: siguienteId("reservas", "id_reserva"), id_usuario: usuario.id_usuario, id_charla: idCharla, fecha_reserva: ahora(), estado: "confirmada" };
+  bd.reservas.push(reserva);
+  registrarEmail(reserva, "confirmacion");
+  guardarBD();
+  aviso(`Reserva confirmada: ${codigoReserva(reserva.id_reserva)}`);
+  pintarCharlas();
 }
 
-async function cancelarReserva(idReserva) {
-  if (!confirm("¿Seguro que quieres cancelar esta reserva?")) return;
-  try {
-    await AditechApi.cancelReservation(idReserva);
-    await cargarDatosServidor();
-    aviso("Reserva cancelada");
-    pintarPanel();
-  } catch (error) {
-    aviso(error.message || "No se pudo cancelar la reserva.", true);
-  }
+function cancelarReserva(idReserva) {
+  const r = bd.reservas.find((x) => x.id_reserva === idReserva);
+  if (!r || !confirm("¿Seguro que quieres cancelar esta reserva?")) return;
+  r.estado = "cancelada";
+  registrarEmail(r, "cancelacion");
+  guardarBD();
+  aviso("Reserva cancelada");
+  pintarPanel();
+}
+
+function registrarEmail(reserva, tipo) {
+  const u = bd.usuarios.find((x) => x.id_usuario === reserva.id_usuario);
+  bd.notificaciones_email.push({
+    id_email: siguienteId("notificaciones_email", "id_email"), id_reserva: reserva.id_reserva,
+    destinatario: u.email, tipo, fecha_envio: ahora(), estado_envio: "enviado"
+  });
 }
 
 // ---------- PONENTES (con desplegable) ----------
@@ -276,66 +261,48 @@ function abrirLogin(pestana = "login") {
         <label>Contraseña <input type="password" name="password" required /></label>
         <button class="btn">Entrar</button>
         <p class="msg-form" id="msgLogin"></p>
-      </form>`
+      </form>
+      <p class="ayuda">Usuarios de prueba: asistente@aditech.es / user123 · personal@aditech.es / staff123 · organizador@aditech.es / org123 · admin@aditech.es / admin123</p>`
     : `
       <form id="formRegistro" class="formulario">
         <label>Nombre <input name="nombre" required /></label>
         <label>Apellidos <input name="apellidos" required /></label>
         <label>Email <input type="email" name="email" required /></label>
-        <label>Contraseña (mín. 8 caracteres) <input type="password" name="password" minlength="8" required /></label>
+        <label>Contraseña (mín. 6 caracteres) <input type="password" name="password" minlength="6" required /></label>
         <button class="btn">Crear cuenta</button>
         <p class="msg-form" id="msgRegistro"></p>
       </form>`}
   `);
 }
 
-async function login(form) {
-  const msg = $("#msgLogin");
-  try {
-    await AditechApi.login({
-      email: form.email.value.trim().toLowerCase(),
-      password: form.password.value
-    });
-    await cargarDatosServidor();
-    cerrarModal();
-    pintarEstructura();
-    if (rolDe(usuarioActual()) === "asistente" && PAGINA === "charlas") {
-      pintarCharlas();
-      aviso(`Bienvenido/a, ${usuarioActual().nombre}`);
-    } else {
-      location.href = "panel.html";
-    }
-  } catch (error) {
-    msg.textContent = error.message || "No se pudo iniciar sesión.";
-    msg.className = "msg-form ko";
-  }
+function login(form) {
+  const email = form.email.value.trim().toLowerCase();
+  const u = bd.usuarios.find((x) => x.email === email && x.password === form.password.value && x.activo);
+  if (!u) { $("#msgLogin").textContent = "Email o contraseña incorrectos"; $("#msgLogin").className = "msg-form ko"; return; }
+  localStorage.setItem(CLAVE_SESION, u.id_usuario);
+  // El asistente sigue donde estaba (p. ej. reservando); el resto va a su panel
+  if (rolDe(u) === "asistente" && PAGINA === "charlas") { cerrarModal(); pintarEstructura(); pintarCharlas(); aviso(`Bienvenido/a, ${u.nombre}`); }
+  else location.href = "panel.html";
 }
 
-async function registro(form) {
+function registro(form) {
   const msg = $("#msgRegistro");
+  const email = form.email.value.trim().toLowerCase();
   if (!form.checkValidity()) { msg.textContent = "Revisa los campos del formulario"; msg.className = "msg-form ko"; return; }
-  try {
-    await AditechApi.register({
-      nombre: form.nombre.value.trim(),
-      apellidos: form.apellidos.value.trim(),
-      email: form.email.value.trim().toLowerCase(),
-      password: form.password.value
-    });
-    location.href = "panel.html";
-  } catch (error) {
-    msg.textContent = error.message || "No se pudo crear la cuenta.";
-    msg.className = "msg-form ko";
-  }
+  if (bd.usuarios.some((u) => u.email === email)) { msg.textContent = "Ese email ya está registrado"; msg.className = "msg-form ko"; return; }
+  const nuevo = {
+    id_usuario: siguienteId("usuarios", "id_usuario"), id_rol: 4, nombre: form.nombre.value.trim(),
+    apellidos: form.apellidos.value.trim(), email, password: form.password.value, activo: 1, fecha_registro: ahora()
+  };
+  bd.usuarios.push(nuevo);
+  guardarBD();
+  localStorage.setItem(CLAVE_SESION, nuevo.id_usuario);
+  location.href = "panel.html";
 }
 
-async function logout() {
-  try {
-    await AditechApi.logout();
-    usuarioSesion = null;
-    location.href = "index.html";
-  } catch (error) {
-    aviso(error.message || "No se pudo cerrar la sesión.", true);
-  }
+function logout() {
+  localStorage.removeItem(CLAVE_SESION);
+  location.href = "index.html";
 }
 
 // ---------- QR simulado (patrón determinista a partir del código) ----------
@@ -360,7 +327,7 @@ function verQR(idReserva) {
   const r = bd.reservas.find((x) => x.id_reserva === idReserva);
   const c = bd.charlas.find((x) => x.id_charla === r.id_charla);
   const codigo = codigoReserva(r.id_reserva);
-  abrirModal(`<h3>Tu entrada</h3><p>${esc(c.titulo)}</p><p class="meta">${formatoFecha(c.fecha)} · ${c.hora_inicio} · ${esc(sala(c.id_sala)?.nombre ?? "Sala no disponible")}</p>
+  abrirModal(`<h3>Tu entrada</h3><p>${esc(c.titulo)}</p><p class="meta">${formatoFecha(c.fecha)} · ${c.hora_inicio} · ${esc(sala(c.id_sala).nombre)}</p>
     ${qrHTML(codigo)}<p class="centrado codigo">${codigo}</p><p class="ayuda centrado">Muestra este código en la entrada.</p>`);
 }
 
@@ -380,7 +347,7 @@ function pintarPanel() {
   if (rol === "asistente") html = panelAsistente(u);
   if (rol === "personal") html = panelPersonal();
   if (rol === "organizador" || rol === "administrador") html = panelOrganizador();
-  if (rol === "administrador") html += '<p>La administración de usuarios aún no está disponible en la API.</p>';
+  if (rol === "administrador") html += panelAdmin();
   $("#panelContenido").innerHTML = html;
 }
 
@@ -406,7 +373,35 @@ function panelAsistente(u) {
 }
 
 function panelPersonal() {
-  return '<h3 class="centrado panel-h3">Validación de entradas</h3><p class="centrado">La validación de entradas aún no está disponible en la API.</p>';
+  const ultimas = [...bd.asistencias].reverse().slice(0, 10);
+  return `<h3 class="centrado panel-h3">Validación de entradas</h3>
+    <form id="formValidar" class="validador">
+      <input name="codigo" placeholder="Código del QR (ej. ADI-00004)" required />
+      <button class="btn">Validar entrada</button>
+    </form>
+    <h3 class="panel-h3">Últimas validaciones</h3>
+    ${ultimas.length ? `<div class="tabla-wrap"><table><tr><th>Código</th><th>Asistente</th><th>Charla</th><th>Hora</th></tr>
+      ${ultimas.map((a) => {
+        const r = bd.reservas.find((x) => x.id_reserva === a.id_reserva);
+        const u = bd.usuarios.find((x) => x.id_usuario === r.id_usuario);
+        const c = bd.charlas.find((x) => x.id_charla === r.id_charla);
+        return `<tr><td class="codigo">${codigoReserva(r.id_reserva)}</td><td>${esc(u.nombre + " " + u.apellidos)}</td><td>${esc(c.titulo)}</td><td>${a.fecha_hora_acceso}</td></tr>`;
+      }).join("")}</table></div>` : '<p class="meta">Todavía no se ha validado ninguna entrada.</p>'}`;
+}
+
+function validarEntrada(codigo) {
+  const id = Number(codigo.trim().toUpperCase().replace("ADI-", ""));
+  const r = bd.reservas.find((x) => x.id_reserva === id);
+  if (!r) return aviso("Código no encontrado", true);
+  if (r.estado !== "confirmada") return aviso("La reserva no está confirmada", true);
+  if (bd.asistencias.some((a) => a.id_reserva === id)) return aviso("Esta entrada ya fue validada", true);
+  bd.asistencias.push({
+    id_asistencia: siguienteId("asistencias", "id_asistencia"), id_reserva: id,
+    id_usuario_validador: usuarioActual().id_usuario, fecha_hora_acceso: ahora(), resultado: "valida"
+  });
+  guardarBD();
+  aviso("Entrada válida ✔ Acceso permitido");
+  pintarPanel();
 }
 
 function panelOrganizador() {
@@ -415,12 +410,56 @@ function panelOrganizador() {
     ${bd.charlas.map((c) => {
       const res = reservasActivas(c.id_charla);
       const asis = bd.asistencias.filter((a) => res.some((r) => r.id_reserva === a.id_reserva)).length;
-      return `<tr><td>${esc(c.titulo)}</td><td>${c.fecha} ${c.hora_inicio}</td><td>${esc(sala(c.id_sala)?.nombre ?? "Sala no disponible")}</td>
-        <td>${c.reservas_activas_count ?? res.length} / ${c.aforo_maximo}</td><td>${asis}</td><td>${estadoChip(c.estado)}</td></tr>`;
+      return `<tr><td>${esc(c.titulo)}</td><td>${c.fecha} ${c.hora_inicio}</td><td>${esc(sala(c.id_sala).nombre)}</td>
+        <td>${res.length} / ${c.aforo_maximo}</td><td>${asis}</td><td>${estadoChip(c.estado)}</td></tr>`;
     }).join("")}
   </table></div>
-  <h3 class="panel-h3">Gestión de charlas</h3>
-  <p>La creación y edición de charlas aún no está disponible en la API.</p>`;
+  <h3 class="panel-h3">Nueva charla</h3>
+  <form id="formCharla" class="formulario caja">
+    <label>Título <input name="titulo" required maxlength="200" /></label>
+    <label>Descripción <textarea name="descripcion" rows="2"></textarea></label>
+    <label>Sala <select name="id_sala">${bd.salas.map((s) => `<option value="${s.id_sala}">${esc(s.nombre)} (${s.capacidad} plazas)</option>`).join("")}</select></label>
+    <label>Ponente <select name="id_ponente">${bd.ponentes.map((p) => `<option value="${p.id_ponente}">${esc(p.nombre + " " + p.apellidos)}</option>`).join("")}</select></label>
+    <label>Fecha <input type="date" name="fecha" required /></label>
+    <label>Hora inicio <input type="time" name="hora_inicio" required /></label>
+    <label>Hora fin <input type="time" name="hora_fin" required /></label>
+    <label>Aforo máximo <input type="number" name="aforo_maximo" min="1" required /></label>
+    <button class="btn">Publicar charla</button>
+    <p class="msg-form" id="msgCharla"></p>
+  </form>`;
+}
+
+function crearCharla(form) {
+  const msg = $("#msgCharla");
+  const s = sala(Number(form.id_sala.value));
+  const aforo = Number(form.aforo_maximo.value);
+  let error = "";
+  if (!form.checkValidity()) error = "Completa todos los campos obligatorios";
+  else if (form.hora_fin.value <= form.hora_inicio.value) error = "La hora de fin debe ser posterior a la de inicio";
+  else if (aforo > s.capacidad) error = `El aforo no puede superar la capacidad de la sala (${s.capacidad})`;
+  else if (bd.charlas.some((c) => c.id_sala === s.id_sala && c.fecha === form.fecha.value && c.estado !== "cancelada" &&
+    form.hora_inicio.value < c.hora_fin && form.hora_fin.value > c.hora_inicio)) error = "La sala ya está ocupada en ese horario";
+  if (error) { msg.textContent = error; msg.className = "msg-form ko"; return; }
+
+  const id = siguienteId("charlas", "id_charla");
+  bd.charlas.push({
+    id_charla: id, id_organizador: usuarioActual().id_usuario, id_sala: s.id_sala, titulo: form.titulo.value.trim(),
+    descripcion: form.descripcion.value.trim(), fecha: form.fecha.value, hora_inicio: form.hora_inicio.value,
+    hora_fin: form.hora_fin.value, aforo_maximo: aforo, estado: "publicada"
+  });
+  bd.charla_ponente.push({ id_charla: id, id_ponente: Number(form.id_ponente.value) });
+  guardarBD();
+  aviso("Charla publicada");
+  pintarPanel();
+}
+
+function panelAdmin() {
+  return `<h3 class="panel-h3">Usuarios del sistema</h3><div class="tabla-wrap"><table>
+    <tr><th>Nombre</th><th>Email</th><th>Rol</th><th>Activo</th></tr>
+    ${bd.usuarios.map((u) => `<tr><td>${esc(u.nombre + " " + u.apellidos)}</td><td>${esc(u.email)}</td><td>${rolDe(u)}</td>
+      <td>${u.activo ? '<span class="chip ok">sí</span>' : '<span class="chip ko">no</span>'}</td></tr>`).join("")}
+  </table></div>
+  <p class="centrado"><button class="btn btn-sec btn-peq" id="btnReset">Restablecer datos de la demo</button></p>`;
 }
 
 // ---------- CONTACTO ----------
@@ -442,13 +481,16 @@ function enviarContacto(e) {
 document.addEventListener("click", (e) => {
   const t = e.target.closest("button, a, #modal") || e.target;
   if (t.id === "btnAcceder" || t.id === "btnAccederPanel") { e.preventDefault(); abrirLogin(); }
-  if (t.id === "btnSalir") { e.preventDefault(); void logout(); }
+  if (t.id === "btnSalir") { e.preventDefault(); logout(); }
   if (t.id === "menuBtn") $("#menu").classList.toggle("abierto");
-  if (t.dataset.reservar) void reservar(Number(t.dataset.reservar));
-  if (t.dataset.cancelar) void cancelarReserva(Number(t.dataset.cancelar));
+  if (t.dataset.reservar) reservar(Number(t.dataset.reservar));
+  if (t.dataset.cancelar) cancelarReserva(Number(t.dataset.cancelar));
   if (t.dataset.qr) verQR(Number(t.dataset.qr));
   if (t.dataset.pestana) abrirLogin(t.dataset.pestana);
   if (t.dataset.desplegar) alternarDetalle(t.dataset.desplegar);
+  if (t.id === "btnReset" && confirm("¿Restablecer todos los datos de la demo?")) {
+    localStorage.removeItem(CLAVE_BD); localStorage.removeItem(CLAVE_SESION); location.href = "index.html";
+  }
   if (e.target.id === "modal" || t.id === "cerrarModal") cerrarModal();
 });
 
@@ -456,32 +498,21 @@ document.addEventListener("submit", (e) => {
   const id = e.target.id;
   if (id === "formContacto") return enviarContacto(e);
   e.preventDefault();
-  if (id === "formLogin") void login(e.target);
-  if (id === "formRegistro") void registro(e.target);
+  if (id === "formLogin") login(e.target);
+  if (id === "formRegistro") registro(e.target);
+  if (id === "formValidar") validarEntrada(e.target.codigo.value);
+  if (id === "formCharla") crearCharla(e.target);
 });
 
 document.addEventListener("keydown", (e) => { if (e.key === "Escape") cerrarModal(); });
 
 // ---------- Arranque según la página ----------
-async function iniciarPagina() {
-  pintarEstructura();
-
-  try {
-    await cargarDatosServidor();
-  } catch (error) {
-    console.error("No se pudieron cargar los datos de la API.", error);
-    aviso("No se pudo conectar con el servidor. Comprueba que Laravel y MySQL estén activos.", true);
-  }
-
-  pintarEstructura();
-  if (PAGINA === "inicio") pintarStats();
-  if (PAGINA === "charlas") {
-    rellenarFiltros();
-    pintarCharlas();
-    ["#buscador", "#filtroFecha", "#filtroSala"].forEach((selector) => $(selector).addEventListener("input", pintarCharlas));
-  }
-  if (PAGINA === "ponentes") pintarPonentes();
-  if (PAGINA === "panel") pintarPanel();
+pintarEstructura();
+if (PAGINA === "inicio") pintarStats();
+if (PAGINA === "charlas") {
+  rellenarFiltros();
+  pintarCharlas();
+  ["#buscador", "#filtroFecha", "#filtroSala"].forEach((s) => $(s).addEventListener("input", pintarCharlas));
 }
-
-void iniciarPagina();
+if (PAGINA === "ponentes") pintarPonentes();
+if (PAGINA === "panel") pintarPanel();

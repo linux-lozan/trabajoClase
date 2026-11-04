@@ -1,28 +1,16 @@
-# AdiTech Events
+# React + Vite
 
-La interfaz está en `public/assets` y usa la API de Laravel para leer el
-catálogo y guardar las cuentas y reservas. Ya no utiliza `localStorage` como
-fuente de datos. El cliente HTTP está en `public/assets/js/api.js`.
+This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
 
-## Desarrollo local
+Currently, two official plugins are available:
 
-1. Desde `back-end`, inicia los servicios con `docker compose up -d --build`.
-2. Crea el esquema y los roles iniciales con
-   `docker compose exec web php artisan migrate --seed`.
-3. Desde esta carpeta, ejecuta `npm run dev` y abre la URL indicada por Vite.
-   Las llamadas a `/api` se reenvían al backend de `http://127.0.0.1:8080`.
-   Puedes cambiar el destino con `VITE_API_PROXY_TARGET` en `.env.local`.
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
 
-El `.env` de Laravel debe apuntar a MySQL (`DB_HOST=db` dentro de Compose).
-El primer arranque no crea charlas de ejemplo: el catálogo muestra las charlas
-publicadas que existan en la base de datos. La migración incluye las tablas de
-ponentes y su relación con las charlas.
+## React Compiler
 
-La API incluye `GET /api/charlas`, `GET /api/ponentes`, `GET /api/salas`,
-`GET /api/user`, `POST /api/login`, `POST /api/register`, `POST /api/logout`,
-`GET /api/reservas`, `POST /api/charlas/{id}/reservas` y
-`DELETE /api/reservas/{id}`. La autenticación utiliza sesión de Laravel y
-protección CSRF; las reservas se validan y persisten en MySQL.
+The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
 
-Las operaciones de administración, creación de charlas y validación de
-asistencia todavía no están expuestas por esta API.
+## Expanding the Oxlint configuration
+
+If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
