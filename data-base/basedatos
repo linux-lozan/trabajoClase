@@ -4,3 +4,22 @@ usuarios ADI_user adi123
          root     6Aula_Root_202
 docker compose exec db mysql -u ADI_user -padi123 sabitech -e "SHOW TABLES;" (ver todas las tablas)
 docker compose exec db mysql -u ADI_user -padi123 sabitech -e "DESCRIBE x;" (ver contenido de la tabla cambia x por la tabla)
+
+1. Comprueba el estado de los contenedores (back-end)
+Desde la misma carpeta donde tienes el archivo docker-compose.yml, ejecuta:
+docker compose ps
+
+2. Arranca los servicios de Docker Compose
+Ejecuta:
+docker compose up -d
+
+
+3. Comprueba que la base de datos está funcionando
+Ejecuta:
+docker compose ps
+
+Deberías ver algo parecido a:
+NAME          SERVICE    STATUS
+sabitech-db   db         Up
+
+Si aparece Up, perfecto.
