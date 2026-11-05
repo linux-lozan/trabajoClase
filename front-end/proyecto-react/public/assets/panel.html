@@ -3,33 +3,37 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Mi panel · AdiTech Events</title>
+  <meta name="description" content="Vista previa del área de gestión de AdiTech Events." />
+  <title>Mi panel | AdiTech Events</title>
   <link rel="icon" type="image/png" href="fav.icon.png" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" />
   <link rel="stylesheet" href="css/estilos.css" />
 </head>
-<body data-pagina="panel">
-  <header id="cabecera" class="cabecera"></header>
-
+<body>
+  <header class="cabecera">
+    <a class="marca" href="index.html" aria-label="AdiTech Events, inicio"><span class="marca-icono" aria-hidden="true">A</span><span>AdiTech <span class="marca-secundaria">Events</span></span></a>
+    <nav aria-label="Navegación principal">
+      <a href="index.html">Inicio</a><a href="charlas.html">Charlas</a><a href="ponentes.html">Ponentes</a><a href="planes.html">Planes</a><a href="contacto.html">Contacto</a><a class="boton boton-nav" href="panel.html" aria-current="page">Mi panel</a>
+    </nav>
+  </header>
   <main>
-    <section class="cab-pagina">
-      <div class="contenedor">
-        <p class="etiqueta">Área privada</p>
-        <h1 id="panelTitulo">Mi panel</h1>
-        <p id="panelSub">Inicia sesión para acceder a tu área.</p>
+    <section class="encabezado-pagina">
+      <p class="etiqueta">Área privada · Vista previa</p>
+      <h1>Tu evento, <span>de un vistazo.</span></h1>
+      <p>Una muestra visual de la futura área de gestión. No requiere inicio de sesión y no contiene datos reales.</p>
+    </section>
+    <section class="contenido-pagina">
+      <div class="estado-panel"><span class="estado-icono" aria-hidden="true">i</span><div><strong>Panel en desarrollo</strong><p>La autenticación y las acciones del panel estarán disponibles cuando se conecte el back-end.</p></div></div>
+      <div class="resumen-panel">
+        <article class="tarjeta-resumen"><span>Charlas programadas</span><strong>—</strong><small>Información aún no disponible</small></article>
+        <article class="tarjeta-resumen"><span>Salas del evento</span><strong>—</strong><small>Información aún no disponible</small></article>
+        <article class="tarjeta-resumen"><span>Asistentes</span><strong>—</strong><small>Información aún no disponible</small></article>
+      </div>
+      <div class="panel-inferior">
+        <div class="tarjeta-panel"><div class="cabecera-lista"><h2>Actividad reciente</h2><span class="insignia">Vista previa</span></div><p class="vacio-panel">La actividad aparecerá aquí cuando el panel esté conectado.</p></div>
+        <div class="tarjeta-panel"><h2>Accesos rápidos</h2><a class="acceso-panel" href="charlas.html">Consultar agenda <span aria-hidden="true">→</span></a><a class="acceso-panel" href="ponentes.html">Ver ponentes <span aria-hidden="true">→</span></a><a class="acceso-panel" href="contacto.html">Contactar con el equipo <span aria-hidden="true">→</span></a></div>
       </div>
     </section>
-
-    <section class="seccion">
-      <div class="contenedor" id="panelContenido"></div>
-    </section>
   </main>
-
-  <footer id="pie" class="pie"></footer>
-  <script src="js/datos.js"></script>
-  <script src="js/app.js"></script>
-  <script src="js/efectos.js"></script>
+  <footer class="pie"><a class="marca" href="index.html"><span class="marca-icono" aria-hidden="true">A</span><span>AdiTech <span class="marca-secundaria">Events</span></span></a><p>Prototipo visual · Proyecto académico</p></footer>
 </body>
 </html>

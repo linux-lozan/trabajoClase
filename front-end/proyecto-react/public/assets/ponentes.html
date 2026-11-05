@@ -3,35 +3,38 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Ponentes · AdiTech Events</title>
+  <meta name="description" content="Apartado de ponentes de AdiTech Events, pendiente de definición." />
+  <title>Ponentes | AdiTech Events</title>
   <link rel="icon" type="image/png" href="fav.icon.png" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" />
   <link rel="stylesheet" href="css/estilos.css" />
 </head>
-<body data-pagina="ponentes">
-  <header id="cabecera" class="cabecera"></header>
-
+<body>
+  <header class="cabecera">
+    <a class="marca" href="index.html" aria-label="AdiTech Events, inicio"><span class="marca-icono" aria-hidden="true">A</span><span>AdiTech <span class="marca-secundaria">Events</span></span></a>
+    <nav aria-label="Navegación principal">
+      <a href="index.html">Inicio</a><a href="charlas.html">Charlas</a><a href="ponentes.html" aria-current="page">Ponentes</a><a href="planes.html">Planes</a><a href="contacto.html">Contacto</a><a class="boton boton-nav" href="panel.html">Mi panel</a>
+    </nav>
+  </header>
   <main>
-    <section class="cab-pagina">
-      <div class="contenedor">
-        <p class="etiqueta">Expertos</p>
-        <h1>Ponentes</h1>
-        <p>Conoce a los profesionales que participan en nuestros eventos y su especialización.</p>
-      </div>
+    <section class="encabezado-pagina">
+      <p class="etiqueta">Personas que inspiran</p>
+      <h1>Voces con algo <span>que contar.</span></h1>
+      <p>Un espacio preparado para presentar a las personas que participan en los eventos.</p>
     </section>
-
-    <section class="seccion">
-      <div class="contenedor">
-        <div id="listaPonentes" class="ponentes-lista"></div>
+    <section class="contenido-pagina">
+      <div class="aviso-grande">
+        <span class="aviso-icono" aria-hidden="true">01</span>
+        <div><p class="etiqueta">Apartado pendiente</p><h2>Estamos preparando este espacio.</h2>
+          <p>El esquema actual de la base de datos no incluye información de ponentes. Antes de publicar perfiles reales, será necesario definir y conectar esos datos.</p>
+        </div>
+      </div>
+      <div class="rejilla-funciones">
+        <article class="tarjeta-funcion"><span class="numero">01</span><h3>Perfil profesional</h3><p>Nombre, biografía y especialidad de cada ponente, cuando los datos estén disponibles.</p></article>
+        <article class="tarjeta-funcion"><span class="numero">02</span><h3>Charlas relacionadas</h3><p>Vínculo entre las personas participantes y las sesiones del programa.</p></article>
+        <article class="tarjeta-funcion"><span class="numero">03</span><h3>Información verificada</h3><p>Los perfiles se mostrarán cuando el modelo de datos esté definido.</p></article>
       </div>
     </section>
   </main>
-
-  <footer id="pie" class="pie"></footer>
-  <script src="js/datos.js"></script>
-  <script src="js/app.js"></script>
-  <script src="js/efectos.js"></script>
+  <footer class="pie"><a class="marca" href="index.html"><span class="marca-icono" aria-hidden="true">A</span><span>AdiTech <span class="marca-secundaria">Events</span></span></a><p>Prototipo visual · Proyecto académico</p></footer>
 </body>
 </html>

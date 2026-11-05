@@ -3,41 +3,38 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Charlas · AdiTech Events</title>
+  <meta name="description" content="Vista previa de la agenda de charlas de AdiTech Events." />
+  <title>Charlas | AdiTech Events</title>
   <link rel="icon" type="image/png" href="fav.icon.png" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" />
   <link rel="stylesheet" href="css/estilos.css" />
 </head>
-<body data-pagina="charlas">
-  <header id="cabecera" class="cabecera"></header>
-
+<body>
+  <header class="cabecera">
+    <a class="marca" href="index.html" aria-label="AdiTech Events, inicio"><span class="marca-icono" aria-hidden="true">A</span><span>AdiTech <span class="marca-secundaria">Events</span></span></a>
+    <nav aria-label="Navegación principal">
+      <a href="index.html">Inicio</a><a href="charlas.html" aria-current="page">Charlas</a><a href="ponentes.html">Ponentes</a><a href="planes.html">Planes</a><a href="contacto.html">Contacto</a><a class="boton boton-nav" href="panel.html">Mi panel</a>
+    </nav>
+  </header>
   <main>
-    <section class="cab-pagina">
-      <div class="contenedor">
-        <p class="etiqueta">Agenda</p>
-        <h1>Charlas</h1>
-        <p>Filtra, consulta y reserva tu plaza en las charlas publicadas.</p>
-      </div>
+    <section class="encabezado-pagina">
+      <p class="etiqueta">Agenda del evento</p>
+      <h1>Charlas e ideas <span>para compartir.</span></h1>
+      <p>Un ejemplo visual de cómo podría consultarse el programa. Las sesiones aún no están cargadas desde el back-end.</p>
     </section>
-
-    <section class="seccion">
-      <div class="contenedor">
-        <div class="filtros">
-          <input type="search" id="buscador" placeholder="Buscar por título o ponente..." />
-          <select id="filtroFecha"><option value="">Todas las fechas</option></select>
-          <select id="filtroSala"><option value="">Todas las salas</option></select>
-        </div>
-        <div id="listaCharlas" class="rejilla-3"></div>
-        <p id="sinResultados" class="oculto centrado">No hay charlas que coincidan con la búsqueda.</p>
-      </div>
+    <section class="contenido-pagina">
+      <div class="cabecera-lista"><div><p class="etiqueta">Programa de ejemplo</p><h2>Próximas sesiones</h2></div><span class="insignia">Datos ilustrativos</span></div>
+      <article class="fila-charla">
+        <time class="hora-charla">09:30</time><div class="detalle-charla"><span class="categoria">Bienvenida</span><h3>Recepción y apertura</h3><p>Presentación de la jornada y bienvenida a los asistentes.</p></div><span class="sala-charla">Sala principal</span>
+      </article>
+      <article class="fila-charla">
+        <time class="hora-charla">10:15</time><div class="detalle-charla"><span class="categoria">Tecnología</span><h3>Construir productos digitales accesibles</h3><p>Una sesión de ejemplo sobre diseño y desarrollo inclusivo.</p></div><span class="sala-charla">Sala principal</span>
+      </article>
+      <article class="fila-charla">
+        <time class="hora-charla">11:30</time><div class="detalle-charla"><span class="categoria">Taller</span><h3>Prototipado rápido en equipo</h3><p>Actividad ilustrativa para explorar ideas y crear prototipos.</p></div><span class="sala-charla">Sala 2</span>
+      </article>
+      <p class="aviso-pagina">Las charlas, horarios y salas de esta página son ejemplos; la agenda oficial está pendiente de conexión.</p>
     </section>
   </main>
-
-  <footer id="pie" class="pie"></footer>
-  <script src="js/datos.js"></script>
-  <script src="js/app.js"></script>
-  <script src="js/efectos.js"></script>
+  <footer class="pie"><a class="marca" href="index.html"><span class="marca-icono" aria-hidden="true">A</span><span>AdiTech <span class="marca-secundaria">Events</span></span></a><p>Prototipo visual · Proyecto académico</p></footer>
 </body>
 </html>

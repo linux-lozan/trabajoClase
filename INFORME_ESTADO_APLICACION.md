@@ -1,8 +1,9 @@
 # Informe del alcance de AdiTech Events
 
 **Fecha:** 4 de noviembre de 2026  
-**Alcance acordado:** configuración del back-end Docker/Laravel y de los modelos
-Eloquent para el esquema SQL existente.
+**Alcance acordado:** configuración del back-end Docker/Laravel, modelos
+Eloquent para el esquema SQL existente y limpieza de las funciones simuladas
+del frontend.
 
 ## Realizado
 
@@ -27,16 +28,22 @@ Eloquent para el esquema SQL existente.
 - Casts para fechas, capacidades, booleanos y hash de contraseña.
 - Valores de desarrollo documentados en `app/.env.example` y pasos de arranque
   en `back-end/README.md`.
+- Retirada de los datos de prueba precargados del frontend y de las funciones
+  locales de registro, inicio de sesión, reservas, paneles y envío de contacto.
+- Conservación de las páginas y estilos informativos, con avisos donde la
+  información depende de la conexión a la base de datos o de servicios aún no
+  implementados.
 
 ## Fuera de alcance
 
 - No hay endpoints API funcionales implementados.
-- El frontend no está conectado a Laravel y no se ha modificado para esta
-  entrega. La web actual conserva su funcionamiento de demostración.
+- El frontend todavía no está conectado a Laravel ni a MySQL.
 - No se ha implementado registro, autenticación, reserva persistente ni
   administración de charlas en el servidor.
 - El SQL proporcionado no contiene tablas de ponentes, por lo que no se han
   añadido modelos o relaciones para ponentes.
+- El envío del formulario de contacto, los precios y las notificaciones reales
+  no están configurados.
 
 ## Puesta en marcha
 
@@ -54,6 +61,7 @@ ejecutar automáticamente.
 
 ## Validación
 
-La configuración de los modelos se debe validar contra el MySQL de Docker antes
-de considerar comprobada la conexión. La importación automática del SQL solo se
-produce al inicializar un volumen MySQL vacío.
+La configuración de Compose es válida y los modelos se han revisado, pero se
+debe probar la conexión contra el MySQL de Docker antes de considerarla
+comprobada. La importación automática del SQL solo se produce al inicializar un
+volumen MySQL vacío.
