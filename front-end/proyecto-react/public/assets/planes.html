@@ -3,42 +3,42 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Planes · AdiTech Events</title>
-  <link rel="icon" type="image/png" href="Imagen1.png" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" />
+  <meta name="description" content="Propuesta visual de planes de AdiTech Events; precios y contratación pendientes." />
+  <title>Planes | AdiTech Events</title>
   <link rel="stylesheet" href="css/estilos.css" />
 </head>
-<body data-pagina="planes">
-  <header id="cabecera" class="cabecera"></header>
-
+<body>
+  <header class="cabecera">
+    <a class="marca" href="index.html" aria-label="AdiTech Events, inicio"><span class="marca-icono" aria-hidden="true">A</span><span>AdiTech <span class="marca-secundaria">Events</span></span></a>
+    <nav aria-label="Navegación principal">
+      <a href="index.html">Inicio</a><a href="charlas.html">Charlas</a><a href="ponentes.html">Ponentes</a><a href="planes.html" aria-current="page">Planes</a><a href="contacto.html">Contacto</a><a class="boton boton-nav" href="panel.html">Mi panel</a>
+    </nav>
+  </header>
   <main>
-    <section class="cab-pagina">
-      <div class="contenedor">
-        <p class="etiqueta">Precios</p>
-        <h1>Planes</h1>
-        <p>Propuesta de planes sin precios ni contratación configurados.</p>
-      </div>
+    <section class="encabezado-pagina">
+      <p class="etiqueta">Opciones para cada evento</p>
+      <h1>Planes pensados <span>para crecer.</span></h1>
+      <p>Una propuesta de estructura. Los precios, condiciones y la contratación todavía no están configurados.</p>
     </section>
-
-    <section class="seccion">
-      <div class="contenedor rejilla-3">
-        <article class="plan"><h3>Meetup</h3><p class="precio">Pendiente</p>
-          <ul><li>Condiciones por definir</li><li>Capacidad por definir</li><li>Funciones por implementar</li></ul>
-          <a href="contacto.html" class="btn btn-sec">Contacto</a></article>
-        <article class="plan destacado"><span class="cinta">Propuesta</span><h3>Pro</h3><p class="precio">Pendiente</p>
-          <ul><li>Condiciones por definir</li><li>Funciones por implementar</li><li>Disponibilidad por definir</li></ul>
-          <a href="contacto.html" class="btn">Contacto</a></article>
-        <article class="plan"><h3>Enterprise</h3><p class="precio">Pendiente</p>
-          <ul><li>Condiciones por definir</li><li>Integraciones por definir</li><li>Soporte por definir</li></ul>
-          <a href="contacto.html" class="btn btn-sec">Contacto</a></article>
-      </div>
+    <section class="contenido-pagina rejilla-planes">
+      <article class="tarjeta-plan">
+        <p class="etiqueta">Para empezar</p><h2>Meetup</h2><p class="descripcion-plan">Una opción sencilla para encuentros y eventos pequeños.</p>
+        <p class="precio-plan">Por definir</p><ul><li>Información del evento</li><li>Programa de charlas</li><li>Gestión básica de salas</li></ul>
+        <a class="boton boton-claro" href="contacto.html">Consultar propuesta <span aria-hidden="true">→</span></a>
+      </article>
+      <article class="tarjeta-plan plan-destacado">
+        <span class="insignia">Propuesta</span><p class="etiqueta">Para equipos</p><h2>Pro</h2><p class="descripcion-plan">Herramientas para coordinar jornadas con varias sesiones.</p>
+        <p class="precio-plan">Por definir</p><ul><li>Programa y organización de salas</li><li>Control de capacidad previsto</li><li>Gestión de asistentes por implementar</li></ul>
+        <a class="boton" href="contacto.html">Consultar propuesta <span aria-hidden="true">→</span></a>
+      </article>
+      <article class="tarjeta-plan">
+        <p class="etiqueta">Para organizaciones</p><h2>Enterprise</h2><p class="descripcion-plan">Una propuesta adaptable a eventos y necesidades de mayor escala.</p>
+        <p class="precio-plan">Por definir</p><ul><li>Condiciones personalizadas</li><li>Integraciones por definir</li><li>Soporte por concretar</li></ul>
+        <a class="boton boton-claro" href="contacto.html">Consultar propuesta <span aria-hidden="true">→</span></a>
+      </article>
     </section>
+    <p class="aviso-pagina aviso-centro">Estos planes son orientativos. No hay precios ni contratación disponibles en esta maqueta.</p>
   </main>
-
-  <footer id="pie" class="pie"></footer>
-  <script src="js/app.js"></script>
-  <script src="js/efectos.js"></script>
+  <footer class="pie"><a class="marca" href="index.html"><span class="marca-icono" aria-hidden="true">A</span><span>AdiTech <span class="marca-secundaria">Events</span></span></a><p>Prototipo visual · Proyecto académico</p></footer>
 </body>
 </html>

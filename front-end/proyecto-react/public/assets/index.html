@@ -3,122 +3,124 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AdiTech Events · Gestión de eventos tecnológicos</title>
-  <meta name="description" content="AdiTech Events desarrolla y comercializa aplicaciones web para organizar y gestionar eventos tecnológicos." />
-  <link rel="icon" type="image/png" href="Imagen1.png" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" />
+  <meta name="description" content="Prototipo visual sencillo de AdiTech Events, una plataforma para organizar eventos tecnológicos." />
+  <title>AdiTech Events | Gestión de eventos tecnológicos</title>
   <link rel="stylesheet" href="css/estilos.css" />
 </head>
-<body data-pagina="inicio">
-  <header id="cabecera" class="cabecera"></header>
+<body>
+  <header class="cabecera">
+    <a class="marca" href="#inicio" aria-label="AdiTech Events, inicio">
+      <span class="marca-icono" aria-hidden="true">A</span>
+      <span>AdiTech <span class="marca-secundaria">Events</span></span>
+    </a>
+    <nav aria-label="Navegación principal">
+      <a href="index.html" aria-current="page">Inicio</a>
+      <a href="charlas.html">Charlas</a>
+      <a href="ponentes.html">Ponentes</a>
+      <a href="planes.html">Planes</a>
+      <a href="contacto.html">Contacto</a>
+      <a class="boton boton-nav" href="panel.html">Mi panel</a>
+    </nav>
+  </header>
 
-  <main>
-    <section class="hero">
-      <div class="contenedor hero-grid">
-        <div>
-          <p class="etiqueta">Software para eventos tecnológicos</p>
-          <h1>Organiza tu evento tech <span class="resaltado">sin perder el control</span></h1>
-          <p class="lead">AdiTech Events es un proyecto para gestionar eventos tecnológicos. La conexión con la base de datos oficial y sus funcionalidades están pendientes de implementar.</p>
-          <div class="acciones">
-            <a href="charlas.html" class="btn">Ver la agenda</a>
-            <a href="planes.html" class="btn btn-sec">Ver planes</a>
+  <main id="inicio">
+    <section class="portada">
+      <div class="contenido-portada">
+        <p class="etiqueta"><span class="punto" aria-hidden="true"></span> Prototipo visual · AdiTech Events</p>
+        <h1>Tu próximo evento tech, <span>mejor organizado.</span></h1>
+        <p class="introduccion">
+          Una propuesta sencilla para reunir la agenda, las salas y la información
+          de cada evento tecnológico en un solo lugar.
+        </p>
+        <div class="acciones-portada">
+          <a class="boton" href="#funciones">Conocer el proyecto <span aria-hidden="true">→</span></a>
+          <a class="enlace" href="#estado">Ver estado del desarrollo</a>
+        </div>
+      </div>
+      <aside class="tarjeta-agenda" aria-label="Vista previa de una agenda de ejemplo">
+        <div class="agenda-cabecera">
+          <div>
+            <p class="etiqueta etiqueta-oscura">Vista previa</p>
+            <h2>Agenda del evento</h2>
           </div>
+          <span class="insignia">Ejemplo</span>
         </div>
-        <div class="hero-visual">
-          <div class="logo3d" id="logo3d" role="img" aria-label="Logo de ADITech">
-            <div class="logo3d-tilt"><div class="logo3d-giro"><div class="logo3d-cuerpo">
-              <!-- Cara frontal: efectos.js la clona hacia atrás para darle volumen -->
-              <svg class="capa frente" viewBox="0 0 200 220" aria-hidden="true">
-                <defs>
-                  <linearGradient id="l3-cara" x1="0" y1="0" x2="1" y2="1">
-                    <stop offset="0" stop-color="#3a63e0" /><stop offset=".55" stop-color="#1a3fae" /><stop offset="1" stop-color="#122f8a" />
-                  </linearGradient>
-                  <linearGradient id="l3-luz" x1="0" y1="0" x2="1" y2="0">
-                    <stop offset="0" stop-color="#fff" stop-opacity="0" /><stop offset=".5" stop-color="#fff" stop-opacity=".75" /><stop offset="1" stop-color="#fff" stop-opacity="0" />
-                  </linearGradient>
-                  <mask id="l3-forma" maskUnits="userSpaceOnUse" x="0" y="0" width="200" height="220">
-                    <path d="M88 16H112L152 128H126L100 58L74 128H48Z" fill="#fff" stroke="#fff" stroke-width="5" stroke-linejoin="round" />
-                    <rect x="70" y="64" width="60" height="48" rx="7" fill="#fff" />
-                    <text x="100" y="178" text-anchor="middle" class="l3-adi" fill="#fff">ADI</text>
-                  </mask>
-                </defs>
-                <path class="s" d="M88 16H112L152 128H126L100 58L74 128H48Z" fill="url(#l3-cara)" stroke="url(#l3-cara)" stroke-width="5" stroke-linejoin="round" />
-                <rect class="s" x="70" y="64" width="60" height="48" rx="7" fill="#1e48c4" stroke="#fff" stroke-width="3" />
-                <g class="detalle">
-                  <rect x="70" y="64" width="60" height="12" rx="6" fill="#29b6f0" />
-                  <rect x="83" y="58" width="6" height="12" rx="3" fill="#0b1d55" /><rect x="111" y="58" width="6" height="12" rx="3" fill="#0b1d55" />
-                  <g fill="#fff">
-                    <rect x="77" y="81" width="9" height="9" rx="2" /><rect x="89.5" y="81" width="9" height="9" rx="2" /><rect x="102" y="81" width="9" height="9" rx="2" /><rect x="114.5" y="81" width="9" height="9" rx="2" />
-                    <rect x="77" y="94" width="9" height="9" rx="2" /><rect x="89.5" y="94" width="9" height="9" rx="2" /><rect x="102" y="94" width="9" height="9" rx="2" fill="#29b6f0" /><rect x="114.5" y="94" width="9" height="9" rx="2" />
-                  </g>
-                </g>
-                <text class="s l3-adi" x="100" y="178" text-anchor="middle" fill="url(#l3-cara)">ADI</text>
-                <g class="brillo" mask="url(#l3-forma)"><rect class="barrido" x="-60" y="0" width="60" height="220" fill="url(#l3-luz)" /></g>
-              </svg>
-              <!-- «Tech», un poco por delante -->
-              <svg class="capa tech" viewBox="0 0 200 220" aria-hidden="true">
-                <line x1="30" y1="200" x2="66" y2="200" /><line x1="134" y1="200" x2="170" y2="200" />
-                <text x="100" y="208" text-anchor="middle">Tech</text>
-              </svg>
-              <!-- Red de nodos, flotando por delante del logo -->
-              <svg class="capa red" viewBox="0 0 200 220" aria-hidden="true">
-                <g class="enlaces">
-                  <path d="M146 30L166 16L186 28L178 50L156 54Z" /><path d="M146 30L168 35L186 28M166 16L168 35L178 50M156 54L168 35" />
-                </g>
-                <circle class="nodo" cx="146" cy="30" r="4.2" /><circle class="nodo" cx="166" cy="16" r="3.6" /><circle class="nodo" cx="186" cy="28" r="4.2" />
-                <circle class="nodo" cx="178" cy="50" r="3.6" /><circle class="nodo" cx="156" cy="54" r="4" /><circle class="nodo central" cx="168" cy="35" r="5" />
-              </svg>
-            </div></div></div>
-          </div>
+        <div class="agenda-fila">
+          <time>09:30</time>
+          <div><strong>Recepción de asistentes</strong><span>Acceso principal</span></div>
+          <span class="agenda-punto" aria-hidden="true"></span>
         </div>
+        <div class="agenda-fila">
+          <time>10:00</time>
+          <div><strong>Bienvenida</strong><span>Sala principal</span></div>
+          <span class="agenda-punto" aria-hidden="true"></span>
+        </div>
+        <div class="agenda-fila">
+          <time>11:00</time>
+          <div><strong>Charlas y talleres</strong><span>Programa por definir</span></div>
+          <span class="agenda-punto agenda-punto-azul" aria-hidden="true"></span>
+        </div>
+        <p class="nota-ejemplo">Contenido ilustrativo; la agenda real dependerá de la conexión con el back-end.</p>
+      </aside>
+      <div class="decoracion" aria-hidden="true"></div>
+    </section>
+
+    <section class="seccion" id="proyecto">
+      <div class="seccion-titulo">
+        <p class="etiqueta">01 / El proyecto</p>
+        <h2>Menos caos. <span>Más evento.</span></h2>
+      </div>
+      <p class="seccion-texto">
+        AdiTech Events es una aplicación pensada para ayudar a organizar eventos
+        tecnológicos: desde la planificación de las charlas y las salas hasta la
+        asistencia de los participantes.
+      </p>
+    </section>
+
+    <section class="seccion seccion-funciones" id="funciones">
+      <div class="seccion-titulo">
+        <p class="etiqueta">02 / Lo que se está preparando</p>
+        <h2>Todo en su sitio.</h2>
+      </div>
+      <div class="rejilla-funciones">
+        <article class="tarjeta-funcion">
+          <span class="numero">01</span>
+          <h3>Charlas y salas</h3>
+          <p>Organización del programa, los espacios y la capacidad de cada sala.</p>
+        </article>
+        <article class="tarjeta-funcion">
+          <span class="numero">02</span>
+          <h3>Reservas</h3>
+          <p>Gestión de las plazas de los asistentes cuando esté disponible el servicio.</p>
+        </article>
+        <article class="tarjeta-funcion">
+          <span class="numero">03</span>
+          <h3>Control de acceso</h3>
+          <p>Preparación para validar la asistencia y agilizar la entrada al evento.</p>
+        </article>
       </div>
     </section>
 
-    <div class="marquesina" aria-hidden="true">
-      <div class="pista">
-        <span>Meetups<em>✦</em>Congresos<em>✦</em>Hackathons<em>✦</em>Jornadas universitarias<em>✦</em>Entradas con QR<em>✦</em>Control de aforo<em>✦</em></span>
-        <span>Meetups<em>✦</em>Congresos<em>✦</em>Hackathons<em>✦</em>Jornadas universitarias<em>✦</em>Entradas con QR<em>✦</em>Control de aforo<em>✦</em></span>
+    <section class="estado" id="estado">
+      <div>
+        <p class="etiqueta etiqueta-oscura">03 / Estado actual</p>
+        <h2>La web es una maqueta visual.</h2>
+        <p>
+          Esta maqueta visual solo utiliza HTML y CSS. La agenda, las reservas,
+          el inicio de sesión y el resto de funciones todavía no están conectados
+          al back-end.
+        </p>
       </div>
-    </div>
-
-    <section class="seccion">
-      <div class="contenedor">
-        <h2>Perfiles previstos</h2>
-        <p class="sub">Estos perfiles describen el alcance previsto; todavía no están disponibles en la web.</p>
-        <div class="rejilla-4">
-          <article class="tarjeta"><div class="icono">🛡️</div><h3>Administrador</h3><p>Gestión completa del sistema: usuarios, roles, salas y configuración.</p></article>
-          <article class="tarjeta"><div class="icono">🗓️</div><h3>Organizador</h3><p>Crea y publica charlas, asigna ponentes y salas, y controla el aforo.</p></article>
-          <article class="tarjeta"><div class="icono">📷</div><h3>Personal</h3><p>Valida la entrada de los asistentes escaneando su código QR.</p></article>
-          <article class="tarjeta"><div class="icono">🎟️</div><h3>Asistente</h3><p>Consulta la agenda, reserva plaza y recibe confirmación por email.</p></article>
-        </div>
-      </div>
-    </section>
-
-    <section class="seccion alt">
-      <div class="contenedor">
-        <h2>Funcionalidades por desarrollar</h2>
-        <p class="sub">La aplicación se conectará a la base de datos oficial cuando se implemente el back-end funcional.</p>
-        <div class="rejilla-3">
-          <article class="tarjeta"><div class="icono">📊</div><h3>Control de aforo</h3><p>Funcionalidad pendiente de implementar y conectar con la base de datos.</p></article>
-          <article class="tarjeta"><div class="icono">✉️</div><h3>Notificaciones</h3><p>El envío real de emails todavía no está configurado.</p></article>
-          <article class="tarjeta"><div class="icono">🔒</div><h3>Reservas</h3><p>El registro de usuarios y las reservas reales todavía no están disponibles.</p></article>
-        </div>
-      </div>
-    </section>
-
-    <section class="seccion">
-      <div class="contenedor cta">
-        <h2>¿Preparas tu próximo evento?</h2>
-        <p>La información y las funciones de gestión se incorporarán durante el desarrollo.</p>
-        <a href="contacto.html" class="btn">Contacto</a>
-      </div>
+      <span class="estado-insignia"><span class="punto" aria-hidden="true"></span> Desarrollo en curso</span>
     </section>
   </main>
 
-  <footer id="pie" class="pie"></footer>
-  <script src="js/app.js"></script>
-  <script src="js/efectos.js"></script>
+  <footer class="pie">
+    <a class="marca" href="#inicio">
+      <span class="marca-icono" aria-hidden="true">A</span>
+      <span>AdiTech <span class="marca-secundaria">Events</span></span>
+    </a>
+    <p>Prototipo visual · Proyecto académico</p>
+  </footer>
 </body>
 </html>
