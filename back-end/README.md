@@ -2,10 +2,11 @@
 
 ## Alcance
 
-Este back-end contiene la configuración Docker de Laravel y MySQL y los modelos
-Eloquent correspondientes al esquema definido en
-`data-base/sabitech_.sql`. No incluye endpoints funcionales de API ni conecta la
-interfaz web a Laravel.
+Este back-end contiene la configuración Docker de Laravel y MySQL, los modelos
+Eloquent correspondientes al esquema definido en `data-base/sabitech_.sql` y
+el endpoint de solo lectura `GET /api/charlas`. La página de charlas del
+frontend consume ese endpoint mediante el proxy de desarrollo de Vite. El resto
+de operaciones de la API y de la interfaz todavía no está conectado.
 
 ## Arranque local
 
@@ -30,6 +31,16 @@ si contiene datos que quieras conservar.
 Los valores `change-me` son únicamente credenciales locales de desarrollo. Para
 otros entornos, define contraseñas propias en las variables que usa Compose y en
 `app/.env`.
+
+## API disponible
+
+`GET /api/charlas` devuelve los campos básicos de las charlas. Para desarrollo,
+la configuración de Vite reenvía las peticiones `/api` a `http://localhost:8080`.
+Inicia Laravel/MySQL con Docker y el frontend con `npm run dev` desde
+`front-end/proyecto-react`. Se verificó que Laravel conecta con MySQL y que el
+endpoint responde; devuelve una lista vacía hasta que se carguen charlas. Las
+operaciones de autenticación, reservas y administración aún no están
+implementadas.
 
 ## Modelos Eloquent
 
