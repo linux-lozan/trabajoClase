@@ -3,10 +3,12 @@
 ## Alcance
 
 Este back-end contiene la configuración Docker de Laravel y MySQL, los modelos
-Eloquent correspondientes al esquema definido en `data-base/sabitech_.sql` y
-el endpoint de solo lectura `GET /api/charlas`. La página de charlas del
-frontend consume ese endpoint mediante el proxy de desarrollo de Vite. El resto
-de operaciones de la API y de la interfaz todavía no está conectado.
+Eloquent correspondientes al esquema definido en `data-base/sabitech_.sql`,
+migraciones para las tablas del dominio y recursos API CRUD para roles, salas,
+usuarios, charlas, reservas, asistencias y notificaciones. La página de charlas
+del frontend consume `/api/charlas` mediante el proxy de desarrollo de Vite.
+La autenticación, autorización y reglas completas de negocio aún no están
+implementadas.
 
 ## Arranque local
 
@@ -34,13 +36,13 @@ otros entornos, define contraseñas propias en las variables que usa Compose y e
 
 ## API disponible
 
-`GET /api/charlas` devuelve los campos básicos de las charlas. Para desarrollo,
-la configuración de Vite reenvía las peticiones `/api` a `http://localhost:8080`.
-Inicia Laravel/MySQL con Docker y el frontend con `npm run dev` desde
-`front-end/proyecto-react`. Se verificó que Laravel conecta con MySQL y que el
-endpoint responde; devuelve una lista vacía hasta que se carguen charlas. Las
-operaciones de autenticación, reservas y administración aún no están
-implementadas.
+Las rutas API se definen en `routes/api.php` usando recursos CRUD. Para
+desarrollo, la configuración de Vite reenvía las peticiones `/api` a
+`http://localhost:8080`. Inicia Laravel/MySQL con Docker y el frontend con
+`npm run dev` desde `front-end/proyecto-react`. El endpoint de charlas respondió
+correctamente en la comprobación del 5 de noviembre; las rutas/controladores
+CRUD incorporados después requieren validación en ejecución. No hay
+autenticación ni autorización configuradas para proteger los recursos.
 
 ## Modelos Eloquent
 
@@ -62,5 +64,8 @@ capacidades y hashes de contraseña. El SQL no define tablas de ponentes ni una
 tabla intermedia de ponentes, así que no hay modelos o relaciones Eloquent para
 ellas.
 
-El esquema de la base se crea con el SQL proporcionado; no se debe ejecutar una
-migración de Laravel que intente recrear esas tablas.
+El esquema puede inicializarse desde el SQL proporcionado o mediante las
+migraciones del dominio. Estas migraciones omiten la creación de tablas que ya
+existen, para evitar recrearlas sobre una base inicializada con el SQL. Comprueba
+el estado de las migraciones antes de usarlas en una base con datos y conserva
+el volumen existente.

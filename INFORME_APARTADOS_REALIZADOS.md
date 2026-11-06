@@ -1,109 +1,107 @@
 # Informe de apartados realizados — AdiTech Events
 
-**Fecha de revisión:** 5 de noviembre de 2026  
-**Base de revisión:** archivos del proyecto y comprobación con los contenedores
-Docker en ejecución el 5 de noviembre de 2026.
+**Fecha de revisión:** 6 de noviembre de 2026  
+**Base de revisión:** inspección del código y documentación disponibles. La
+última validación de Docker/MySQL y del endpoint se realizó el 5 de noviembre.
+Hoy Docker no está disponible y Windows bloqueó la ejecución de PHP, por lo que
+no se pudieron repetir las pruebas.
 
-Este informe recoge los entregables implementados, distinguiendo las bases
-parciales de las funciones terminadas. La numeración corresponde a los 15
-apartados del enunciado.
+Este informe diferencia funcionalidades implementadas, bases parciales y
+aspectos pendientes. La numeración corresponde a los 15 apartados del enunciado.
 
-## Apartados realizados o con una base implementada
+## Apartados con trabajo implementado
 
 ### 01. Definir SABITECH y sus reglas — Parcial
 
-- El esquema contempla roles de administrador, organizador, personal y
+- El esquema contempla los perfiles administrador, organizador, personal y
   asistente.
-- Las tablas definen charlas, salas, reservas, estados y registros de asistencia.
-- Hay restricciones de base de datos para relaciones y para impedir reservas
-  activas duplicadas del mismo usuario en una charla.
-- La aplicación todavía no aplica todas las reglas de negocio, como el control
-  de aforo o los permisos por perfil.
+- Hay tablas para charlas, salas, reservas, asistencias y notificaciones, con
+  estados, claves foráneas e índices.
+- La base incluye una restricción que impide reservas activas duplicadas para
+  el mismo usuario y charla.
+- Faltan las reglas de negocio y permisos aplicados por la aplicación; véase el
+  informe de pendientes.
 
-### 03. Diseñar y crear la base de datos — Implementado y validado
+### 03. Diseñar y crear la base de datos — Esquema implementado
 
-- Existe el esquema SQL para usuarios, roles, salas, charlas, reservas,
-  asistencias y notificaciones por correo.
-- Se incluyen claves foráneas, estados y restricciones de integridad.
-- Docker configura MySQL 8.4 y monta el SQL para inicializar un volumen nuevo.
-- Laravel cuenta con modelos Eloquent mapeados a las tablas y claves del
-  esquema, con relaciones y conversiones de tipos.
-- Se verificó la conexión de Laravel a MySQL 8.4.13, base `sabitech`, en Docker.
-- Laravel detecta las siete tablas y todos los modelos Eloquent pudieron
-  consultar su tabla.
-- Se inspeccionaron las columnas, claves foráneas e índices de `charlas` y
-  `reservas`; la base incluye la restricción única de reserva activa.
-- Las tablas contienen los cuatro roles iniciales. Usuarios, salas, charlas,
-  reservas, asistencias y notificaciones están vacíos actualmente.
+- Existe el SQL de creación de las siete tablas del dominio y la configuración
+  para inicializar MySQL con ese SQL en un volumen nuevo.
+- Se añadieron siete migraciones Laravel para roles, salas, usuarios, charlas,
+  reservas, asistencias y notificaciones, además de un seeder.
+- El seeder incluye datos de desarrollo; no se ha ejecutado ni validado en la
+  base activa tras su incorporación.
+- Los siete modelos Eloquent mapean las tablas y claves del esquema y declaran
+  relaciones y conversiones de tipos.
+- El 5 de noviembre se comprobó que Laravel conectaba con MySQL 8.4.13, veía las
+  siete tablas y que los modelos podían consultarlas.
+- Las migraciones nuevas y el seeder no se han podido validar hoy en una base
+  activa. La tabla `charlas` estaba vacía en la comprobación anterior.
 
-### 04. Conectar el catálogo a la API — Primera versión implementada
+### 04. Conectar el catálogo a la API — Parcial
 
-- Laravel registra `GET /api/charlas`, que devuelve los campos básicos de las
-  charlas.
-- La página de charlas solicita `/api/charlas` y representa los datos recibidos.
-- Vite tiene un proxy de desarrollo para reenviar `/api` a Laravel.
-- Se consultó el endpoint con Laravel y MySQL en ejecución; respondió HTTP 200
-  con una lista vacía, coherente con que no hay charlas cargadas.
-- La integración a través del proxy del navegador no se probó de extremo a
-  extremo y no hay endpoint de detalle.
+- `routes/api.php` declara recursos API para roles, salas, usuarios, charlas,
+  reservas, asistencias y notificaciones.
+- Hay controladores CRUD con validación de los campos recibidos.
+- La página de charlas usa `fetch('/api/charlas')`; Vite tiene un proxy hacia
+  Laravel en `http://localhost:8080`.
+- El endpoint de lectura respondió HTTP 200 el 5 de noviembre, antes de los
+  cambios recientes de rutas/controladores. Hoy no se pudo volver a ejecutar.
+- El frontend solo consume el catálogo de charlas; las demás páginas no usan
+  estos recursos API.
 
-### 05. Identificar usuarios y guardar reservas — Estructura parcial
+### 05. Identificar usuarios y guardar reservas — CRUD parcial
 
-- El esquema y los modelos contemplan usuarios y reservas, incluyendo su
-  relación con las charlas.
-- No existe todavía el flujo de autenticación ni un endpoint para crear y
-  consultar reservas.
+- Hay recursos API y controladores CRUD para usuarios y reservas, además de sus
+  tablas y modelos.
+- La creación valida campos y referencias existentes.
+- No hay flujo de inicio de sesión ni autorización; los endpoints no aplican
+  propiedad de reserva ni reglas de acceso por perfil.
 
-### 06. Cancelar y proteger el aforo — Restricción parcial
+### 06. Cancelar y proteger el aforo — Protección parcial en base de datos
 
-- La base contempla estados de reserva y una restricción contra reservas
-  activas duplicadas.
-- La aplicación aún no implementa cancelaciones ni valida el aforo máximo.
+- El esquema previene reservas activas duplicadas del mismo usuario y charla.
+- El controlador de reservas permite operaciones CRUD, pero no implementa el
+  control de capacidad ni un flujo de cancelación con reglas de negocio.
 
-### 07. Enviar el correo de confirmación — Estructura parcial
+### 07. Enviar el correo de confirmación — Registro parcial
 
-- Existe una tabla y un modelo para registrar notificaciones asociadas a
-  reservas, con estados de envío.
-- No está implementado el proceso que envía el correo ni su confirmación.
+- Existe un recurso API CRUD y un modelo para notificaciones asociadas a
+  reservas, con destinatario, tipo y estado.
+- El controlador solo administra registros; no envía correos.
 
-### 09. Registrar y consultar la asistencia — Estructura parcial
+### 09. Registrar y consultar la asistencia — CRUD parcial
 
-- El esquema y el modelo contemplan asistencias vinculadas a una reserva y a un
-  usuario validador.
-- No hay endpoints ni pantallas funcionales para registrar o consultar accesos.
+- Existe un recurso API CRUD y un modelo para asistencias vinculadas a reservas
+  y usuarios validadores.
+- No hay validación de QR ni flujo de acceso con permisos.
 
-### 10. Revisar pantallas y accesibilidad — Interfaz visual inicial
+### 10. Revisar pantallas y accesibilidad — Prototipo visual
 
-- Hay páginas HTML y estilos para inicio, charlas, ponentes, planes, contacto y
-  panel.
-- La agenda de charlas ya tiene estados de carga, error y ausencia de resultados.
-- No consta una auditoría de accesibilidad ni pruebas sistemáticas en móvil,
-  tableta y ordenador.
+- Hay páginas HTML/CSS para inicio, charlas, ponentes, planes, contacto y panel.
+- Los estilos incluyen reglas adaptables a pantallas estrechas y movimiento
+  reducido; la página de charlas anuncia estados de carga y error.
+- No se ha documentado una auditoría de accesibilidad ni pruebas en dispositivos.
 
-### 11. Preparar el entorno — Desarrollo local configurado
+### 11. Preparar el entorno — Desarrollo local
 
-- Hay una configuración Docker para Laravel con Apache/PHP y MySQL.
-- El README del back-end describe los pasos de arranque local.
-- No se ha configurado ni verificado un despliegue, HTTPS, copias de seguridad
-  o recuperación.
+- Hay configuración Docker para Laravel/Apache/PHP y MySQL, con guía de
+  arranque local.
+- No consta despliegue en un entorno de producción.
 
-### 14. Mantener memoria y pruebas — Base mínima
+### 14. Mantener memoria y pruebas — Documentación y estructura inicial
 
-- Hay documentación de arranque y del mapeo de modelos.
-- Laravel incluye la infraestructura de pruebas y pruebas de ejemplo.
-- No se identifican pruebas específicas de los flujos de AdiTech ni un registro
-  de decisiones y resultados de pruebas funcionales.
+- Existen documentación del back-end e informes de estado.
+- Laravel contiene pruebas de ejemplo, pero no pruebas específicas para los
+  recursos API ni las reglas de negocio.
 
-## Archivos de referencia
+## Apartados sin evidencias de implementación
 
-- `data-base/sabitech_.sql`
-- `back-end/compose.yaml`
-- `back-end/app/app/Models/`
-- `back-end/app/routes/api.php`
-- `front-end/proyecto-react/vite.config.js`
-- `front-end/proyecto-react/public/assets/charlas.html`
-- `front-end/proyecto-react/public/assets/js/charlas.js`
+- **02. Empresa y plan de personal:** no se encontró documentación del plan.
+- **08. QR renovable cada 30 segundos:** no se encontró implementación.
+- **12. Digitalización y uso de IA:** no se encontró análisis documentado.
+- **13. Investigación de IA con vídeos en inglés:** no se encontró
+  investigación, bibliografía ni presentación.
+- **15. Dos presentaciones:** no se encontraron materiales de presentación.
 
 Consulta [INFORME_APARTADOS_PENDIENTES.md](./INFORME_APARTADOS_PENDIENTES.md)
-para los trabajos pendientes y los aspectos que faltan en los apartados
-parcialmente implementados.
+para los huecos y las siguientes tareas.
