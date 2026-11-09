@@ -1,5 +1,14 @@
 # React + Vite
 
+## API configuration
+
+Copy `.env.example` to `.env` to configure the API URL and the backend used by the Vite development proxy. The defaults target the Laravel API at `http://localhost:8080`.
+
+- `VITE_API_URL` is the API base URL used by frontend modules (default: `/api`).
+- `API_PROXY_TARGET` is read by Vite only and sets the development proxy destination (default: `http://localhost:8080`).
+
+Keep secrets out of `VITE_*` variables: Vite includes those values in the browser bundle.
+
 This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
 
 Currently, two official plugins are available:

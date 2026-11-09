@@ -1,5 +1,5 @@
 export class charla {
-    constructor(
+    constructor({
         id_charla = null,
         id_organizador = null,
         id_sala = null,
@@ -10,7 +10,7 @@ export class charla {
         hora_fin = null,
         aforo_maximo = 0,
         estado = 'borrador'
-    ) {
+    } = {}) {
         this.id_charla = id_charla;
         this.id_organizador = id_organizador;
         this.id_sala = id_sala;
@@ -28,18 +28,18 @@ export class charla {
     }
 
     static fromJSON(json = {}) {
-        return new charla(
-            json.id_charla ?? json.id ?? null,
-            json.id_organizador ?? null,
-            json.id_sala ?? null,
-            json.titulo ?? json.nombre ?? '',
-            json.descripcion ?? '',
-            json.fecha ?? null,
-            json.hora_inicio ?? null,
-            json.hora_fin ?? null,
-            json.aforo_maximo ?? 0,
-            json.estado ?? 'borrador'
-        );
+        return new charla({
+            id_charla: json.id_charla ?? json.id ?? null,
+            id_organizador: json.id_organizador ?? null,
+            id_sala: json.id_sala ?? null,
+            titulo: json.titulo ?? json.nombre ?? '',
+            descripcion: json.descripcion ?? '',
+            fecha: json.fecha ?? null,
+            hora_inicio: json.hora_inicio ?? null,
+            hora_fin: json.hora_fin ?? null,
+            aforo_maximo: json.aforo_maximo ?? 0,
+            estado: json.estado ?? 'borrador'
+        });
     }
 
     toJSON() {
@@ -53,9 +53,7 @@ export class charla {
             hora_inicio: this.hora_inicio,
             hora_fin: this.hora_fin,
             aforo_maximo: this.aforo_maximo,
-            estado: this.estado,
+            estado: this.estado
         };
     }
 }
-
-export default charla;
