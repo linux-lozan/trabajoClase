@@ -33,5 +33,7 @@ class DatabaseSeeder extends Seeder
                 'activo' => true,
             ],
         );
+
+        $this->call(CharlasDemoSeeder::class);
     }
 }

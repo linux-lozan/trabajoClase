@@ -25,6 +25,19 @@ implementadas.
    docker compose exec web php artisan key:generate
    ```
 
+4. Aplica las migraciones y carga los datos de demostración comunes (3 salas,
+   un organizador y 5 charlas):
+
+   ```powershell
+   docker compose exec web php artisan migrate
+   docker compose exec web php artisan db:seed
+   ```
+
+   El seeder `CharlasDemoSeeder` puede ejecutarse varias veces sin duplicar
+   filas. Si alguien necesita un dato que deba ver todo el equipo, que lo añada
+   al seeder en lugar de insertarlo a mano en su base de datos local.
+   Organizador de prueba: `organizador@aditech.test` / `password`.
+
 MySQL inicializa el esquema desde `../data-base/sabitech_.sql` al crear por
 primera vez el volumen de datos. El script de inicialización no se vuelve a
 ejecutar si el volumen ya contiene una base inicializada. No borres ese volumen
