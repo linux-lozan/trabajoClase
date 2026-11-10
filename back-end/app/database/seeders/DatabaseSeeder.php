@@ -17,10 +17,21 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        $role = Role::firstOrCreate(
-            ['nombre' => 'administrador'],
-            ['descripcion' => 'Gestión completa del sistema'],
-        );
+        $roles = [
+            'administrador' => 'Gestión completa del sistema',
+            'organizador' => 'Crea y gestiona charlas',
+            'personal' => 'Valida la entrada mediante QR',
+            'asistente' => 'Usuario que reserva plaza en charlas',
+        ];
+
+        foreach ($roles as $nombre => $descripcion) {
+            Role::updateOrCreate(
+                ['nombre' => $nombre],
+                ['descripcion' => $descripcion],
+            );
+        }
+
+        $role = Role::where('nombre', 'administrador')->firstOrFail();
 
         User::firstOrCreate(
             ['email' => 'test@example.com'],
