@@ -36,11 +36,13 @@ class CharlasDemoSeeder extends Seeder
         );
 
         $salas = [];
-        foreach ([
-            ['nombre' => 'Auditorio principal', 'ubicacion' => 'Planta baja', 'capacidad' => 150],
-            ['nombre' => 'Sala Turing', 'ubicacion' => 'Primera planta, aula 1.2', 'capacidad' => 40],
-            ['nombre' => 'Sala Lovelace', 'ubicacion' => 'Primera planta, aula 1.5', 'capacidad' => 30],
-        ] as $datos) {
+        foreach (
+            [
+                ['nombre' => 'Auditorio principal', 'ubicacion' => 'Planta baja', 'capacidad' => 150],
+                ['nombre' => 'Sala Turing', 'ubicacion' => 'Primera planta, aula 1.2', 'capacidad' => 40],
+                ['nombre' => 'Sala Lovelace', 'ubicacion' => 'Primera planta, aula 1.5', 'capacidad' => 30],
+            ] as $datos
+        ) {
             $salas[$datos['nombre']] = Sala::firstOrCreate(
                 ['nombre' => $datos['nombre']],
                 $datos,
