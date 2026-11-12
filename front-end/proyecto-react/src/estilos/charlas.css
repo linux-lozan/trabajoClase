@@ -1,0 +1,86 @@
+.cabecera-lista {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: 15px;
+}
+
+.cabecera-lista .etiqueta {
+    margin-bottom: 4px;
+}
+
+.cabecera-lista h2 {
+    margin-bottom: 0;
+    font-size: 1.45rem;
+    letter-spacing: -.04em;
+}
+
+.fila-charla {
+    display: grid;
+    grid-template-columns: 72px 1fr 140px;
+    align-items: center;
+    gap: 22px;
+    padding: 22px 4px;
+    border-top: 1px solid var(--color-borde);
+}
+
+.hora-charla {
+    color: var(--color-principal);
+    font-size: 1rem;
+    font-weight: 750;
+}
+
+.categoria {
+    color: var(--color-principal);
+    font-size: .68rem;
+    font-weight: 750;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+}
+
+.detalle-charla h3 {
+    margin: 3px 0;
+    font-size: 1.02rem;
+}
+
+.detalle-charla p,
+.sala-charla {
+    margin: 0;
+    color: var(--color-texto-secundario);
+    font-size: .84rem;
+}
+
+.sala-charla {
+    text-align: right;
+}
+
+.aviso-pagina {
+    margin: 22px 0 0;
+    padding: 14px 17px;
+    border: 1px solid #dce5fc;
+    border-radius: 9px;
+    background: #f2f6ff;
+    color: #43567e;
+    font-size: .84rem;
+}
+
+@media (max-width: 760px) {
+    .fila-charla {
+        grid-template-columns: 58px 1fr;
+        gap: 8px 14px;
+    }
+
+    .sala-charla {
+        grid-column: 2;
+        text-align: left;
+    }
+}
+
+@media (max-width: 420px) {
+    .cabecera-lista {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 10px;
+    }
+}

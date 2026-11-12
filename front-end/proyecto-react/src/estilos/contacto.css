@@ -1,0 +1,116 @@
+.distribucion-contacto {
+    display: grid;
+    grid-template-columns: .85fr 1.15fr;
+    gap: 65px;
+    align-items: start;
+}
+
+.contacto-texto {
+    padding-top: 12px;
+}
+
+.contacto-texto .etiqueta {
+    margin-bottom: 11px;
+}
+
+.contacto-texto h2 {
+    margin-bottom: 9px;
+    font-size: 1.55rem;
+    letter-spacing: -.04em;
+}
+
+.contacto-texto > p:not(.etiqueta) {
+    max-width: 700px;
+    margin-bottom: 0;
+    color: var(--color-texto-secundario);
+    font-size: .92rem;
+}
+
+.contacto-nota {
+    display: inline-flex;
+    align-items: center;
+    margin-top: 25px;
+    padding: 9px 13px;
+    border-radius: 22px;
+    background: var(--color-blanco);
+    color: var(--color-texto-secundario);
+    font-size: .8rem;
+}
+
+.contacto-nota .punto {
+    background: var(--color-principal);
+}
+
+.tarjeta-formulario {
+    padding: 27px;
+    border: 1px solid var(--color-borde);
+    border-radius: 14px;
+    background: var(--color-blanco);
+}
+
+.tarjeta-formulario h2 {
+    margin: 0 0 7px;
+    font-size: 1.4rem;
+    letter-spacing: -.04em;
+}
+
+.aviso-formulario {
+    margin-bottom: 20px;
+    color: var(--color-texto-secundario);
+    font-size: .8rem;
+}
+
+.tarjeta-formulario form {
+    display: grid;
+    gap: 9px;
+}
+
+.tarjeta-formulario label {
+    margin-top: 6px;
+    font-size: .82rem;
+    font-weight: 650;
+}
+
+.tarjeta-formulario input,
+.tarjeta-formulario textarea {
+    width: 100%;
+    padding: 11px 12px;
+    border: 1px solid var(--color-borde);
+    border-radius: 8px;
+    background: #f8f9fc;
+    color: var(--color-texto-secundario);
+    font-size: .85rem;
+}
+
+.tarjeta-formulario input:disabled,
+.tarjeta-formulario textarea:disabled {
+    cursor: not-allowed;
+    opacity: .72;
+}
+
+.tarjeta-formulario textarea {
+    resize: vertical;
+}
+
+.tarjeta-formulario button {
+    width: 100%;
+    margin-top: 9px;
+}
+
+.tarjeta-formulario button:disabled:hover {
+    transform: none;
+    background: var(--color-principal);
+}
+
+@media (max-width: 760px) {
+    .distribucion-contacto {
+        grid-template-columns: 1fr;
+        gap: 14px;
+    }
+}
+
+@media (max-width: 420px) {
+    .tarjeta-formulario {
+        padding: 21px;
+    }
+}

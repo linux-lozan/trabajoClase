@@ -10,7 +10,7 @@ export function InicioSesion({ onIniciarSesion, error, cargando }) {
     }
 
     return (
-        <main className="login">
+        <section className="login" aria-label="Formulario de inicio de sesión">
             <form className="login__formulario" onSubmit={enviarFormulario}>
                 <h1>Iniciar sesión</h1>
                 <p>Introduce tu correo y contraseña para continuar.</p>
@@ -43,6 +43,6 @@ export function InicioSesion({ onIniciarSesion, error, cargando }) {
                     {cargando ? 'Comprobando...' : 'Entrar'}
                 </button>
             </form>
-        </main>
+        </section>
     );
 }

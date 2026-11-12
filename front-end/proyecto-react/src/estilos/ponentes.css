@@ -1,0 +1,61 @@
+.ponentes-aviso {
+    display: grid;
+    grid-template-columns: 58px 1fr;
+    gap: 22px;
+    align-items: start;
+    margin-bottom: 28px;
+    padding: 30px;
+    border: 1px solid var(--color-borde);
+    border-radius: 14px;
+    background: var(--color-blanco);
+}
+
+.ponentes-aviso__icono {
+    display: grid;
+    width: 48px;
+    height: 48px;
+    place-items: center;
+    border-radius: 13px;
+    background: #edf2ff;
+    color: var(--color-principal);
+    font-size: .95rem;
+    font-weight: 750;
+}
+
+.ponentes-aviso .etiqueta {
+    margin-bottom: 6px;
+}
+
+.ponentes-aviso h2 {
+    margin-bottom: 9px;
+    font-size: 1.55rem;
+    letter-spacing: -.04em;
+}
+
+.ponentes-aviso p:last-child {
+    max-width: 700px;
+    margin-bottom: 0;
+    color: var(--color-texto-secundario);
+    font-size: .92rem;
+}
+
+.ponentes-funciones {
+    margin-top: 0;
+}
+
+@media (max-width: 760px) {
+    .ponentes-funciones {
+        grid-template-columns: 1fr;
+    }
+
+    .ponentes-funciones .tarjeta-funcion {
+        min-height: auto;
+    }
+}
+
+@media (max-width: 420px) {
+    .ponentes-aviso {
+        grid-template-columns: 1fr;
+        padding: 22px;
+    }
+}

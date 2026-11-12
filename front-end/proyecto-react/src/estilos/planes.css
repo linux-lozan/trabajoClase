@@ -1,0 +1,109 @@
+.rejilla-planes {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    align-items: stretch;
+    gap: 18px;
+}
+
+.tarjeta-plan {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    padding: 26px 23px;
+    border: 1px solid var(--color-borde);
+    border-radius: 14px;
+    background: var(--color-blanco);
+}
+
+.tarjeta-plan > .etiqueta {
+    margin: 0 0 9px;
+}
+
+.tarjeta-plan h2 {
+    margin: 0;
+    font-size: 1.65rem;
+    letter-spacing: -.04em;
+}
+
+.descripcion-plan {
+    min-height: 48px;
+    margin: 8px 0 16px;
+    color: var(--color-texto-secundario);
+    font-size: .86rem;
+}
+
+.precio-plan {
+    margin: 0;
+    padding: 13px 0;
+    border-top: 1px solid var(--color-borde);
+    border-bottom: 1px solid var(--color-borde);
+    color: var(--color-principal);
+    font-size: 1.15rem;
+    font-weight: 750;
+}
+
+.tarjeta-plan ul {
+    display: grid;
+    gap: 10px;
+    min-height: 105px;
+    margin: 18px 0 22px;
+    padding-left: 19px;
+    color: var(--color-texto-secundario);
+    font-size: .83rem;
+}
+
+.tarjeta-plan li::marker {
+    color: var(--color-principal);
+}
+
+.tarjeta-plan .boton {
+    width: 100%;
+    margin-top: auto;
+}
+
+.plan-destacado {
+    border-color: var(--color-principal);
+    box-shadow: 0 15px 40px rgb(49 88 216 / 9%);
+}
+
+.plan-destacado > .insignia {
+    position: absolute;
+    top: 20px;
+    right: 18px;
+}
+
+.boton-claro {
+    border-color: var(--color-borde);
+    background: var(--color-blanco);
+    color: var(--color-texto);
+}
+
+.boton-claro:hover:not(:disabled) {
+    border-color: var(--color-principal);
+    color: var(--color-blanco);
+}
+
+.aviso-centro {
+    width: min(1120px, calc(100% - 48px));
+    margin: -58px auto 72px;
+    text-align: center;
+}
+
+@media (max-width: 760px) {
+    .rejilla-planes {
+        grid-template-columns: 1fr;
+        gap: 14px;
+    }
+
+    .aviso-centro {
+        width: min(100% - 36px, 560px);
+        margin: -35px auto 50px;
+    }
+}
+
+@media (max-width: 420px) {
+    .plan-destacado > .insignia {
+        top: 15px;
+        right: 14px;
+    }
+}
