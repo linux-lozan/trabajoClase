@@ -24,12 +24,12 @@ class CharlasDemoSeeder extends Seeder
         );
 
         $organizador = User::firstOrCreate(
-            ['email' => 'organizador@aditech.test'],
+            ['email' => 'organizador@gmail.com'],
             [
                 'id_rol' => $rolOrganizador->id_rol,
-                'nombre' => 'Laura',
-                'apellidos' => 'Martínez Soler',
-                'password_hash' => 'password',
+                'nombre' => 'AdiTech',
+                'apellidos' => 'AdiTech',
+                'password_hash' => '1234',
                 'fecha_registro' => now(),
                 'activo' => true,
             ],

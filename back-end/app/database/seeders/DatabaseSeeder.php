@@ -34,12 +34,12 @@ class DatabaseSeeder extends Seeder
         $role = Role::where('nombre', 'administrador')->firstOrFail();
 
         User::firstOrCreate(
-            ['email' => 'test@example.com'],
+            ['email' => 'test@gmail.com'],
             [
                 'id_rol' => $role->id_rol,
                 'nombre' => 'Test',
                 'apellidos' => 'User',
-                'password_hash' => Hash::make('password'),
+                'password_hash' => Hash::make('1234'),
                 'fecha_registro' => now(),
                 'activo' => true,
             ],
