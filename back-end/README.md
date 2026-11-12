@@ -7,8 +7,9 @@ Eloquent correspondientes al esquema definido en `data-base/sabitech_.sql`,
 migraciones para las tablas del dominio y recursos API CRUD para roles, salas,
 usuarios, charlas, reservas, asistencias y notificaciones. La página de charlas
 del frontend consume `/api/charlas` mediante el proxy de desarrollo de Vite.
-La autenticación, autorización y reglas completas de negocio aún no están
-implementadas.
+El inicio y cierre de sesión usan sesiones de Laravel. Los recursos CRUD siguen
+sin protección por autenticación; iniciar sesión no sustituye a implementar
+autorización.
 
 ## Arranque local
 
@@ -49,13 +50,18 @@ otros entornos, define contraseñas propias en las variables que usa Compose y e
 
 ## API disponible
 
-Las rutas API se definen en `routes/api.php` usando recursos CRUD. Para
-desarrollo, la configuración de Vite reenvía las peticiones `/api` a
+Las rutas API se definen en `routes/api.php` usando recursos CRUD. El inicio de
+sesión está disponible en `POST /api/login`, la sesión actual en `GET /api/user`
+y el cierre en `POST /api/logout`. React obtiene antes el token CSRF desde
+`GET /api/csrf-cookie`. Las credenciales de demostración del seeder son
+`test@example.com` / `password`.
+
+Para desarrollo, la configuración de Vite reenvía las peticiones `/api` a
 `http://localhost:8080`. Inicia Laravel/MySQL con Docker y el frontend con
 `npm run dev` desde `front-end/proyecto-react`. El endpoint de charlas respondió
 correctamente en la comprobación del 5 de noviembre; las rutas/controladores
 CRUD incorporados después requieren validación en ejecución. No hay
-autenticación ni autorización configuradas para proteger los recursos.
+autorización configurada para proteger los recursos.
 
 ## Modelos Eloquent
 
