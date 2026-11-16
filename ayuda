@@ -2,6 +2,6 @@ cd C:\Users\dalog\Documents\trabajo\trabajoClase\front-end\proyecto-react
 npm run dev  (abrir wewb vi)
 
 Usuarios de prueba:
-- Administrador: admin@gmail.com — contraseña: 1234
+- Administrador: admin@gmail.com — contraseña: 1234 
 - Usuario normal: usuario@gmail.com — contraseña: 1234
 - Organizador: organizador@gmail.com — contraseña: 1234
