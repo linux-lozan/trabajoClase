@@ -46,5 +46,6 @@ class DatabaseSeeder extends Seeder
         );
 
         $this->call(CharlasDemoSeeder::class);
+        $this->call(CharlaAforoCompletoSeeder::class);
     }
 }
