@@ -136,11 +136,11 @@ function PaginaPanel({ user, cargando, error, onIniciarSesion, onCerrarSesion, e
             <section className="tarjeta-panel">
                 <div className="cabecera-lista">
                     <div>
-                        <p className="etiqueta">Agenda del servidor</p>
-                        <h2>Charlas programadas</h2>
+                        <p className="etiqueta">Mis reservas</p>
+                        <h2>Tus charlas reservadas</h2>
                     </div>
                 </div>
-                <Listadocharlas usuarioActual={user} />
+                <Listadocharlas usuarioActual={user} soloReservadas />
             </section>
         </main>
     );

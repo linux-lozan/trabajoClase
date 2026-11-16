@@ -14,7 +14,7 @@ function formatearFecha(fecha) {
     return new Intl.DateTimeFormat('es-ES', { dateStyle: 'long' }).format(fechaParseada);
 }
 
-export function Listadocharlas({ onStatusChange, usuarioActual }) {
+export function Listadocharlas({ onStatusChange, usuarioActual, soloReservadas = false }) {
     const [charlas, setCharlas] = useState([]);
     const [estado, setEstado] = useState('cargando');
     const [error, setError] = useState('');
@@ -22,6 +22,7 @@ export function Listadocharlas({ onStatusChange, usuarioActual }) {
     const [reservasConteo, setReservasConteo] = useState({});
     const [reservandoId, setReservandoId] = useState(null);
     const [reservasUsuario, setReservasUsuario] = useState(new Set());
+    const [reservasUsuarioCargadas, setReservasUsuarioCargadas] = useState(false);
 
     useEffect(() => {
         let activo = true;
@@ -54,6 +55,7 @@ export function Listadocharlas({ onStatusChange, usuarioActual }) {
             cargarReservasUsuario();
         } else {
             setReservasUsuario(new Set());
+            setReservasUsuarioCargadas(false);
         }
     }, [usuarioActual]);
 
@@ -74,14 +76,21 @@ export function Listadocharlas({ onStatusChange, usuarioActual }) {
             const response = await fetch(`/api/reservas/usuario/${usuarioActual.id_usuario}`, {
                 headers: { Accept: 'application/json' },
             });
-            
+
             if (response.ok) {
                 const reservas = await response.json();
                 const ids = new Set(reservas.map(r => r.id_charla));
                 setReservasUsuario(ids);
+                setReservasUsuarioCargadas(true);
+                return;
             }
+
+            setReservasUsuario(new Set());
+            setReservasUsuarioCargadas(false);
         } catch (err) {
             console.error('Error al cargar reservas del usuario:', err);
+            setReservasUsuario(new Set());
+            setReservasUsuarioCargadas(false);
         }
     }
 
@@ -149,8 +158,20 @@ export function Listadocharlas({ onStatusChange, usuarioActual }) {
         return <p className="aviso-pagina" role="alert">{error}</p>;
     }
 
+    const charlasMostradas = soloReservadas
+        ? charlas.filter((charla) => reservasUsuario.has(charla.id_charla))
+        : charlas;
+
     if (!charlas.length) {
         return <p className="aviso-pagina" role="status">No hay charlas disponibles.</p>;
+    }
+
+    if (soloReservadas && usuarioActual?.id_usuario && !reservasUsuarioCargadas) {
+        return <p className="aviso-pagina" role="status">Cargando tus reservas…</p>;
+    }
+
+    if (soloReservadas && !charlasMostradas.length) {
+        return <p className="aviso-pagina" role="status">No tienes ninguna charla reservada aún.</p>;
     }
 
     return (
@@ -163,11 +184,11 @@ export function Listadocharlas({ onStatusChange, usuarioActual }) {
                 />
             )}
             <div className="lista-charlas" aria-live="polite">
-                {charlas.map((charla, indice) => {
+                {charlasMostradas.map((charla, indice) => {
                     const conteoActual = reservasConteo[charla.id_charla] || 0;
                     const aforoLleno = conteoActual >= charla.aforo_maximo;
                     const yaReservada = reservasUsuario.has(charla.id_charla);
-                    
+
                     return (
                         <article className="fila-charla" key={charla.id_charla ?? `${charla.titulo}-${indice}`}>
                             <time className="hora-charla" dateTime={charla.hora_inicio || undefined}>
@@ -180,8 +201,8 @@ export function Listadocharlas({ onStatusChange, usuarioActual }) {
                             </div>
                             <div className="acciones-charla">
                                 <span className="aforo-charla">
-                                    {charla.aforo_maximo == null 
-                                        ? 'Aforo no indicado' 
+                                    {charla.aforo_maximo == null
+                                        ? 'Aforo no indicado'
                                         : `Aforo: ${conteoActual}/${charla.aforo_maximo}`
                                     }
                                 </span>
@@ -192,11 +213,11 @@ export function Listadocharlas({ onStatusChange, usuarioActual }) {
                                         disabled={aforoLleno || yaReservada || reservandoId === charla.id_charla}
                                         aria-busy={reservandoId === charla.id_charla}
                                     >
-                                        {reservandoId === charla.id_charla 
-                                            ? 'Reservando...' 
-                                            : yaReservada 
+                                        {reservandoId === charla.id_charla
+                                            ? 'Reservando...'
+                                            : yaReservada
                                             ? 'Ya reservada'
-                                            : aforoLleno 
+                                            : aforoLleno
                                             ? 'Aforo completo'
                                             : 'Reservar'
                                         }
