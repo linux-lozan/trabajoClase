@@ -31,14 +31,33 @@ class DatabaseSeeder extends Seeder
             );
         }
 
-        $role = Role::where('nombre', 'administrador')->firstOrFail();
+        $adminRole = Role::where('nombre', 'administrador')->firstOrFail();
+        $admin = User::firstOrNew(['email' => 'admin@gmail.com']);
+        if (! $admin->exists) {
+            $admin = User::firstOrNew(['email' => 'test@gmail.com']);
+        }
 
+        if (! $admin->exists) {
+            $admin->password_hash = Hash::make('1234');
+            $admin->fecha_registro = now();
+        }
+
+        $admin->fill([
+            'id_rol' => $adminRole->id_rol,
+            'nombre' => 'Admin',
+            'apellidos' => 'User',
+            'email' => 'admin@gmail.com',
+            'activo' => true,
+        ]);
+        $admin->save();
+
+        $userRole = Role::where('nombre', 'asistente')->firstOrFail();
         User::firstOrCreate(
-            ['email' => 'test@gmail.com'],
+            ['email' => 'usuario@gmail.com'],
             [
-                'id_rol' => $role->id_rol,
-                'nombre' => 'Test',
-                'apellidos' => 'User',
+                'id_rol' => $userRole->id_rol,
+                'nombre' => 'Usuario',
+                'apellidos' => '',
                 'password_hash' => Hash::make('1234'),
                 'fecha_registro' => now(),
                 'activo' => true,

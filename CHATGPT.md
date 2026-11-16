@@ -38,7 +38,7 @@ Desde la carpeta `trabajoClase\back-end`:
    El seeder principal actualiza los cuatro roles y sus descripciones, crea el
    usuario de prueba `test@example.com` si falta y llama a
    `CharlasDemoSeeder`, que crea el organizador, 3 salas y 5 charlas si faltan.
-   El organizador de prueba es `organizador@aditech.test` / `password`.
+   El organizador de prueba es `organizador@gmail.com` / `1234`.
 
 5. Comprueba los datos en el navegador:
 
