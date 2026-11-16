@@ -37,7 +37,7 @@ autorización.
    El seeder `CharlasDemoSeeder` puede ejecutarse varias veces sin duplicar
    filas. Si alguien necesita un dato que deba ver todo el equipo, que lo añada
    al seeder en lugar de insertarlo a mano en su base de datos local.
-   Organizador de prueba: `organizador@aditech.test` / `password`.
+   Organizador de prueba: `organizador@gmail.com` / `1234`.
 
 MySQL inicializa el esquema desde `../data-base/sabitech_.sql` al crear por
 primera vez el volumen de datos. El script de inicialización no se vuelve a
@@ -53,8 +53,10 @@ otros entornos, define contraseñas propias en las variables que usa Compose y e
 Las rutas API se definen en `routes/api.php` usando recursos CRUD. El inicio de
 sesión está disponible en `POST /api/login`, la sesión actual en `GET /api/user`
 y el cierre en `POST /api/logout`. React obtiene antes el token CSRF desde
-`GET /api/csrf-cookie`. Las credenciales de demostración del seeder son
-`test@example.com` / `password`.
+`GET /api/csrf-cookie`. Las cuentas locales creadas por el seeder son:
+administrador `admin@gmail.com` / `1234` y usuario normal
+`usuario@gmail.com` / `1234`. Cambia estas contraseñas antes de usarlas fuera
+del entorno local de desarrollo.
 
 Para desarrollo, la configuración de Vite reenvía las peticiones `/api` a
 `http://localhost:8080`. Inicia Laravel/MySQL con Docker y el frontend con
