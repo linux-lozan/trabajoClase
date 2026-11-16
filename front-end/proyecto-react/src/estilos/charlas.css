@@ -18,7 +18,7 @@
 
 .fila-charla {
     display: grid;
-    grid-template-columns: 72px 1fr 140px;
+    grid-template-columns: 72px 1fr auto;
     align-items: center;
     gap: 22px;
     padding: 22px 4px;
@@ -44,15 +44,65 @@
     font-size: 1.02rem;
 }
 
-.detalle-charla p,
-.sala-charla {
+.detalle-charla p {
     margin: 0;
     color: var(--color-texto-secundario);
     font-size: .84rem;
 }
 
-.sala-charla {
+.acciones-charla {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 12px;
+    min-width: 160px;
+}
+
+.aforo-charla {
+    color: var(--color-texto-secundario);
+    font-size: .84rem;
     text-align: right;
+}
+
+.boton-reserva {
+    padding: 8px 16px;
+    border: 1px solid var(--color-principal);
+    border-radius: 6px;
+    background: var(--color-principal);
+    color: var(--color-blanco);
+    font-size: .9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.boton-reserva:hover:not(:disabled) {
+    background: #2747c0;
+    box-shadow: 0 4px 12px rgba(49, 88, 216, 0.3);
+}
+
+.boton-reserva:active:not(:disabled) {
+    transform: scale(0.98);
+}
+
+.boton-reserva:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.boton-deshabilitado {
+    background: #ccc;
+    border-color: #999;
+    color: #666;
+}
+
+.boton-reservado {
+    background: #4caf50;
+    border-color: #45a049;
+}
+
+.boton-reservado:hover {
+    background: #45a049;
 }
 
 .aviso-pagina {
@@ -65,15 +115,83 @@
     font-size: .84rem;
 }
 
+.notificacion {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    max-width: 400px;
+    padding: 16px 20px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    animation: deslizarEntrada 0.3s ease-out;
+    z-index: 1000;
+}
+
+.notificacion-exito {
+    background: #d4edda;
+    border: 1px solid #c3e6cb;
+    color: #155724;
+}
+
+.notificacion-error {
+    background: #f8d7da;
+    border: 1px solid #f5c6cb;
+    color: #721c24;
+}
+
+.notificacion-info {
+    background: #d1ecf1;
+    border: 1px solid #bee5eb;
+    color: #0c5460;
+}
+
+.notificacion-icono {
+    font-weight: bold;
+    font-size: 1.2rem;
+    flex-shrink: 0;
+}
+
+.notificacion-mensaje {
+    margin: 0;
+    font-size: .95rem;
+}
+
+@keyframes deslizarEntrada {
+    from {
+        transform: translateX(400px);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
 @media (max-width: 760px) {
     .fila-charla {
         grid-template-columns: 58px 1fr;
         gap: 8px 14px;
     }
 
-    .sala-charla {
-        grid-column: 2;
+    .acciones-charla {
+        grid-column: 1 / -1;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        margin-top: 12px;
+    }
+
+    .aforo-charla {
         text-align: left;
+    }
+
+    .notificacion {
+        left: 10px;
+        right: 10px;
+        max-width: none;
     }
 }
 
@@ -82,5 +200,9 @@
         align-items: flex-start;
         flex-direction: column;
         gap: 10px;
+    }
+
+    .boton-reserva {
+        width: 100%;
     }
 }

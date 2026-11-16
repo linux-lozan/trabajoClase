@@ -73,7 +73,7 @@ function EncabezadoPagina({ etiqueta, titulo, destacado, descripcion }) {
     );
 }
 
-function PaginaCharlas() {
+function PaginaCharlas({ user }) {
     const [estadoConexion, setEstadoConexion] = useState('cargando');
 
     return (
@@ -94,7 +94,7 @@ function PaginaCharlas() {
                         {estadoConexion === 'cargando' ? 'Conectando…' : estadoConexion === 'error' ? 'Sin conexión' : 'Conectado'}
                     </span>
                 </div>
-                <Listadocharlas onStatusChange={setEstadoConexion} />
+                <Listadocharlas onStatusChange={setEstadoConexion} usuarioActual={user} />
             </section>
         </main>
     );
@@ -140,7 +140,7 @@ function PaginaPanel({ user, cargando, error, onIniciarSesion, onCerrarSesion, e
                         <h2>Charlas programadas</h2>
                     </div>
                 </div>
-                <Listadocharlas />
+                <Listadocharlas usuarioActual={user} />
             </section>
         </main>
     );
@@ -149,7 +149,7 @@ function PaginaPanel({ user, cargando, error, onIniciarSesion, onCerrarSesion, e
 function Contenido({ seccion, ...panelProps }) {
     switch (seccion) {
         case 'charlas':
-            return <PaginaCharlas />;
+            return <PaginaCharlas user={panelProps.user} />;
         case 'ponentes':
             return <Ponentes />;
         case 'planes':

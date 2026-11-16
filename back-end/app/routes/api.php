@@ -22,5 +22,10 @@ Route::apiResource('salas', SalaController::class);
 Route::apiResource('usuarios', UserController::class);
 Route::apiResource('charlas', CharlaController::class);
 Route::apiResource('reservas', ReservaController::class);
+
+// Rutas adicionales para reservas
+Route::get('/reservas/usuario/{userId}', [ReservaController::class, 'getUserReservations']);
+Route::get('/reservas/charla/{charlaId}/count', [ReservaController::class, 'getReservationCountForCharla']);
+
 Route::apiResource('asistencias', AsistenciaController::class);
 Route::apiResource('notificaciones-email', NotificacionEmailController::class);
