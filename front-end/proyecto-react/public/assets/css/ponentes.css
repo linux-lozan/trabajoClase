@@ -1,0 +1,38 @@
+.aviso-grande {
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  gap: 20px;
+  align-items: center;
+  padding: 26px;
+  border: 1px solid var(--border);
+  border-radius: 22px;
+  background: rgba(255,255,255,0.8);
+}
+
+.aviso-icono {
+  display: grid;
+  place-items: center;
+  width: 64px;
+  height: 64px;
+  border-radius: 18px;
+  background: var(--primary-soft);
+  color: var(--primary);
+  font-size: 1.2rem;
+  font-weight: 800;
+}
+
+.aviso-grande h2 {
+  margin-bottom: 10px;
+  font-size: clamp(1.7rem, 3vw, 2.4rem);
+  letter-spacing: -0.04em;
+}
+
+.aviso-grande p:last-child {
+  color: var(--muted);
+}
+
+@media (max-width: 680px) {
+  .aviso-grande {
+    grid-template-columns: 1fr;
+  }
+}

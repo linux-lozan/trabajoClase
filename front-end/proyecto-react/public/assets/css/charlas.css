@@ -1,0 +1,92 @@
+.contenido-pagina {
+  background: rgba(255,255,255,0.55);
+  border: 1px solid var(--border);
+  border-radius: 22px;
+  padding: 26px;
+}
+
+#lista-charlas {
+  display: grid;
+  gap: 18px;
+}
+
+.fila-charla {
+  display: grid;
+  grid-template-columns: 80px 1fr auto;
+  gap: 16px;
+  align-items: center;
+  padding: 18px 18px 18px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.fila-charla:last-child {
+  border-bottom: 0;
+}
+
+.hora-charla {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 42px;
+  padding: 8px 10px;
+  border-radius: 10px;
+  background: var(--primary-soft);
+  color: var(--primary);
+  font-size: 0.85rem;
+  font-weight: 800;
+}
+
+.detalle-charla {
+  min-width: 0;
+}
+
+.categoria {
+  display: inline-block;
+  margin-bottom: 6px;
+  color: var(--primary);
+  font-size: 0.76rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.detalle-charla h3 {
+  margin-bottom: 8px;
+  font-size: 1.25rem;
+  letter-spacing: -0.04em;
+}
+
+.detalle-charla p {
+  margin-bottom: 0;
+  color: var(--muted);
+}
+
+.sala-charla {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 34px;
+  padding: 0 12px;
+  border-radius: 999px;
+  background: #eef4ff;
+  color: var(--text);
+  font-size: 0.76rem;
+  font-weight: 700;
+}
+
+@media (max-width: 700px) {
+  .contenido-pagina {
+    padding: 18px 16px;
+  }
+
+  .fila-charla {
+    grid-template-columns: 1fr;
+    gap: 10px;
+    padding: 18px 0;
+  }
+
+  .hora-charla,
+  .sala-charla {
+    justify-self: start;
+  }
+}

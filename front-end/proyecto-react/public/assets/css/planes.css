@@ -1,0 +1,56 @@
+.rejilla-planes {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 22px;
+  padding-top: 8px;
+}
+
+.tarjeta-plan {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 26px 22px;
+  border: 1px solid var(--border);
+  border-radius: 22px;
+  background: rgba(255,255,255,0.8);
+}
+
+.tarjeta-plan h2 {
+  font-size: 1.8rem;
+  letter-spacing: -0.04em;
+}
+
+.descripcion-plan {
+  color: var(--muted);
+}
+
+.precio-plan {
+  font-size: 1.8rem;
+  font-weight: 800;
+  letter-spacing: -0.05em;
+}
+
+.tarjeta-plan ul {
+  display: grid;
+  gap: 10px;
+  padding-left: 18px;
+  color: var(--muted);
+}
+
+.plan-destacado {
+  border-color: rgba(47, 93, 246, 0.2);
+  background: linear-gradient(135deg, #ffffff, #eef4ff);
+  box-shadow: var(--shadow);
+}
+
+.aviso-centro {
+  margin: 26px auto 0;
+  max-width: 700px;
+  text-align: center;
+}
+
+@media (max-width: 820px) {
+  .rejilla-planes {
+    grid-template-columns: 1fr;
+  }
+}
