@@ -1,5 +1,5 @@
 /* =========================================================
-   AdiTech Events - lógica común a todas las páginas
+   SabiTech - lógica común a todas las páginas
    Los datos se guardan en localStorage para simular la BD.
    ========================================================= */
 
@@ -69,7 +69,7 @@ function pintarEstructura() {
 
   $("#cabecera").innerHTML = `
     <div class="contenedor nav">
-      <a href="index.html" class="logo"><img src="Imagen1.png" alt="Logo AdiTech" />ADITECH<span>EVENTS</span></a>
+      <a href="index.html" class="logo"><img src="Imagen1.png" alt="Logo SabiTech" />SabiTech</a>
       <button class="menu-btn" id="menuBtn" aria-label="Abrir menú">&#9776;</button>
       <nav id="menu">
         ${enlaces}
@@ -81,9 +81,9 @@ function pintarEstructura() {
 
   $("#pie").innerHTML = `
     <div class="contenedor pie-grid">
-      <a href="index.html" class="logo"><img src="Imagen1.png" alt="" />ADITECH<span>EVENTS</span></a>
+      <a href="index.html" class="logo"><img src="Imagen1.png" alt="" />SabiTech</a>
       <nav>${MENU.map(([, url, txt]) => `<a href="${url}">${txt}</a>`).join("")}</nav>
-      <p>© ${new Date().getFullYear()} AdiTech Events · Proyecto final 2º DAW</p>
+      <p>© ${new Date().getFullYear()} SabiTech · Proyecto final 2º DAW</p>
     </div>`;
 
   if (!$("#modal")) {

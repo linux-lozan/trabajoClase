@@ -29,9 +29,9 @@ function Cabecera({ seccion }) {
 
     return (
         <header className="cabecera">
-            <a className="marca" href="#inicio" aria-label="AdiTech Events, inicio">
-                <span className="marca-icono" aria-hidden="true">A</span>
-                <span>AdiTech <span className="marca-secundaria">Events</span></span>
+            <a className="marca" href="#inicio" aria-label="SabiTech, inicio">
+                <span className="marca-icono" aria-hidden="true">S</span>
+                <span>SabiTech</span>
             </a>
             <nav className="navegacion" aria-label="Navegación principal">
                 {enlaces.map(([ruta, nombre]) => (
@@ -55,8 +55,8 @@ function Pie() {
     return (
         <footer className="pie">
             <a className="marca" href="#inicio">
-                <span className="marca-icono" aria-hidden="true">A</span>
-                <span>AdiTech <span className="marca-secundaria">Events</span></span>
+                <span className="marca-icono" aria-hidden="true">S</span>
+                <span>SabiTech</span>
             </a>
             <p>Prototipo visual · Proyecto académico</p>
         </footer>
@@ -116,7 +116,7 @@ function PaginaPanel({ user, cargando, error, onIniciarSesion, onCerrarSesion, e
                     etiqueta="Área privada"
                     titulo="Tu evento,"
                     destacado="de un vistazo."
-                    descripcion="Inicia sesión para acceder al área de gestión de AdiTech Events."
+                    descripcion="Inicia sesión para acceder al área de gestión de SabiTech."
                 />
                 <InicioSesion onIniciarSesion={onIniciarSesion} error={error} cargando={enviando} />
             </main>

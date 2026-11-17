@@ -1,5 +1,5 @@
 /* =========================================================
-   AdiTech Events - efectos de interfaz (solo presentación)
+   SabiTech - efectos de interfaz (solo presentación)
    · Preloader con contador y cortina entre páginas (A24, G. Colombel)
    · Titulares que suben palabra a palabra
    · Aparición de bloques al hacer scroll
@@ -21,8 +21,8 @@
     const cortina = document.createElement("div");
     cortina.className = "cortina";
     cortina.innerHTML = primeraVez
-      ? '<span class="marca">AdiTech Events</span><span class="cuenta">0</span>'
-      : '<span class="marca">AdiTech Events</span>';
+      ? '<span class="marca">SabiTech</span><span class="cuenta">0</span>'
+      : '<span class="marca">SabiTech</span>';
     document.body.appendChild(cortina);
     const quitar = () => {
       cortina.classList.add("fuera");
@@ -55,7 +55,7 @@
     e.preventDefault();
     const c = document.createElement("div");
     c.className = "cortina entra";
-    c.innerHTML = '<span class="marca">AdiTech Events</span>';
+    c.innerHTML = '<span class="marca">SabiTech</span>';
     document.body.appendChild(c);
     c.getBoundingClientRect();
     c.classList.add("cubre");
