@@ -13,7 +13,7 @@ export function Inicio() {
         <main id="inicio">
             <section className="portada">
                 <div className="contenido-portada">
-                    <p className="etiqueta"><span className="punto" aria-hidden="true" /> Prototipo visual · AdiTech Events</p>
+                    <p className="etiqueta"><span className="punto" aria-hidden="true" /> Prototipo visual · SabiTech</p>
                     <h1>Tu próximo evento tech, <span>mejor organizado.</span></h1>
                     <p className="introduccion">
                         Una propuesta sencilla para reunir la agenda, las salas y la información
@@ -58,7 +58,7 @@ export function Inicio() {
                     <h2>Menos caos. <span>Más evento.</span></h2>
                 </div>
                 <p className="seccion-texto">
-                    AdiTech Events es una aplicación pensada para ayudar a organizar eventos
+                    SabiTech es una aplicación pensada para ayudar a organizar eventos
                     tecnológicos: desde la planificación de las charlas y las salas hasta la
                     asistencia de los participantes.
                 </p>

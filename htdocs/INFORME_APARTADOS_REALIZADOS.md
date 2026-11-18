@@ -1,4 +1,4 @@
-# Informe de apartados realizados — AdiTech Events
+# Informe de apartados realizados — SabiTech
 
 **Fecha de revisión:** 6 de noviembre de 2026  
 **Base de revisión:** inspección del código y documentación disponibles. La

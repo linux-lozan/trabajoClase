@@ -1,5 +1,5 @@
 /* =====================================================================
-   AdiTech Events · diseño editorial
+   SabiTech · diseño editorial
    Inspirado en Awwwards Sites of the Day (oct.–nov. 2026):
    · A24 (Ravi Klaassens): grotesca apretada + serif cursiva, preloader y
      transiciones entre páginas con curva cubic-bezier(.625,.05,0,1).
@@ -118,7 +118,7 @@ nav a.activo::before { content: "●"; font-size: .45em; color: var(--marino); m
   animation: levitar 6s ease-in-out infinite; }
 @keyframes levitar { 50% { transform: translateY(-14px) rotate(2deg); } }
 
-/* ---------- Logo 3D ADITech (capas SVG apiladas en CSS 3D) ---------- */
+/* ---------- Logo 3D SabiTech (capas SVG apiladas en CSS 3D) ---------- */
 .logo3d { position: relative; z-index: 1; width: 62%; aspect-ratio: 200 / 220; perspective: 1100px; cursor: pointer; }
 .logo3d::after { content: ""; position: absolute; left: 18%; right: 18%; bottom: -9%; height: 8%; border-radius: 50%;
   background: radial-gradient(closest-side, rgba(11, 29, 85, .35), transparent); filter: blur(4px); animation: sombra3d 9s ease-in-out infinite; }
@@ -377,7 +377,7 @@ tr:hover td { background: rgba(41, 182, 240, .05); }
 .pie .logo img { background: #fff; mix-blend-mode: normal; border-radius: 50%; padding: 5px; height: 48px; width: 48px; }
 .pie nav a:not(.btn) { color: rgba(243, 242, 238, .65); }
 .pie nav a:not(.btn):hover { color: var(--papel); }
-.pie::after { content: "AdiTech"; display: block; text-align: center; font: 600 clamp(5rem, 22vw, 22rem)/.78 var(--sans); letter-spacing: -.075em;
+.pie::after { content: "SabiTech"; display: block; text-align: center; font: 600 clamp(5rem, 22vw, 22rem)/.78 var(--sans); letter-spacing: -.075em;
   color: transparent; -webkit-text-stroke: 1px rgba(243, 242, 238, .22); margin: 2rem 0 -2.2vw; user-select: none;
   background: linear-gradient(180deg, rgba(41, 182, 240, .5), transparent 70%); -webkit-background-clip: text; background-clip: text; }
 

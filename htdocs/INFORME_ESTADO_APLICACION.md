@@ -1,4 +1,4 @@
-# Informe del alcance de AdiTech Events
+# Informe del alcance de SabiTech
 
 **Fecha:** 6 de noviembre de 2026  
 **Alcance:** estado del proyecto contrastado con el código disponible. La última
