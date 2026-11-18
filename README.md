@@ -67,44 +67,41 @@ Antes de arrancar el proyecto, asegúrate de tener instalado:
 - Node.js 18+ y npm
 - PHP 8.3 y Composer (si quieres ejecutar Laravel fuera de Docker)
 
-## Puesta en marcha rápida
+## Puesta en marcha rápida con Docker
 
-### 1) Levantar el backend con Docker
+Desde la carpeta `back-end`, prepara el entorno y arranca los tres servicios:
 
-Desde la carpeta `back-end`:
-
-```bash
-docker compose up -d --build
+```powershell
+if (!(Test-Path .\app\.env)) {
+  Copy-Item .\app\.env.example .\app\.env
+}
+docker compose up --build -d
 ```
 
-### 2) Generar la clave de Laravel
+El contenedor del frontend ejecuta `npm run dev` automáticamente. La aplicación
+queda disponible en `http://localhost:5173`, Laravel en `http://localhost:8080`
+y MySQL dentro de la red Docker.
 
-```bash
+La primera vez, inicializa Laravel y los datos de demostración:
+
+```powershell
 docker compose exec web php artisan key:generate
-```
-
-### 3) Ejecutar migraciones y seeders
-
-```bash
 docker compose exec web php artisan migrate
 docker compose exec web php artisan db:seed
 ```
 
-Esto crea la estructura base y carga datos de prueba. La base de datos se inicializa también desde `data-base/sabitech_.sql` la primera vez que se crea el volumen Docker.
+Para ver los mensajes de Vite:
 
-### 4) Arrancar el frontend
+```powershell
+docker compose logs -f frontend
+```
 
-Abre una terminal en `front-end/proyecto-react` y ejecuta:
+Si prefieres ejecutar el frontend fuera de Docker, desde `front-end/proyecto-react`:
 
-```bash
+```powershell
 npm install
 npm run dev
 ```
-
-El proyecto quedará accesible normalmente en:
-
-- Frontend Vite: `http://localhost:5173`
-- Backend Laravel API: `http://localhost:8080`
 
 ## Variables de entorno
 
@@ -127,7 +124,9 @@ Archivo base:
 
 ### Frontend
 
-Se usa `.env` dentro de `front-end/proyecto-react`.
+Al usar Docker Compose, Vite recibe la dirección interna del backend
+(`http://web:80`) automáticamente. Para ejecutar el frontend fuera de Docker,
+puedes usar `.env` dentro de `front-end/proyecto-react`.
 
 Ejemplo:
 

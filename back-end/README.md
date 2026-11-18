@@ -11,16 +11,20 @@ El inicio y cierre de sesión usan sesiones de Laravel. Los recursos CRUD siguen
 sin protección por autenticación; iniciar sesión no sustituye a implementar
 autorización.
 
-## Arranque local
+## Arranque local con Docker
 
 1. Copia `app/.env.example` a `app/.env`.
-2. Desde esta carpeta, inicia los contenedores:
+2. Desde esta carpeta, inicia la base de datos, Laravel y el frontend:
 
    ```powershell
-   docker compose up -d --build
+   docker compose up --build -d
    ```
 
-3. Genera la clave de Laravel dentro del contenedor:
+   El servicio `frontend` ejecuta `npm run dev` dentro de Docker. La web queda
+   disponible en `http://localhost:5173`, Laravel en `http://localhost:8080`
+   y Vite reenvía `/api` al servicio `web` dentro de la red de Compose.
+
+3. Genera la clave de Laravel dentro del contenedor (solo la primera vez):
 
    ```powershell
    docker compose exec web php artisan key:generate
@@ -32,6 +36,12 @@ autorización.
    ```powershell
    docker compose exec web php artisan migrate
    docker compose exec web php artisan db:seed
+   ```
+
+   Para ver la salida de Vite:
+
+   ```powershell
+   docker compose logs -f frontend
    ```
 
    El seeder `CharlasDemoSeeder` puede ejecutarse varias veces sin duplicar
@@ -58,12 +68,11 @@ administrador `admin@gmail.com` / `1234` y usuario normal
 `usuario@gmail.com` / `1234`. Cambia estas contraseñas antes de usarlas fuera
 del entorno local de desarrollo.
 
-Para desarrollo, la configuración de Vite reenvía las peticiones `/api` a
-`http://localhost:8080`. Inicia Laravel/MySQL con Docker y el frontend con
-`npm run dev` desde `front-end/proyecto-react`. El endpoint de charlas respondió
-correctamente en la comprobación del 5 de noviembre; las rutas/controladores
-CRUD incorporados después requieren validación en ejecución. No hay
-autorización configurada para proteger los recursos.
+En Docker Compose, Vite reenvía las peticiones `/api` a `http://web:80`; el
+nombre `web` identifica el contenedor de Laravel en la red interna. Para ejecutar
+el frontend fuera de Docker, usa `npm run dev` desde `front-end/proyecto-react`;
+en ese caso el proxy usa por defecto `http://localhost:8080` y puede ajustarse
+con `API_PROXY_TARGET`.
 
 ## Modelos Eloquent
 
