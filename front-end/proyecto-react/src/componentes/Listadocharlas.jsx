@@ -3,6 +3,7 @@ import { list } from "../api/charlasApi.js";
 import {
   createReservation,
   getReservationCountForCharla,
+  resetAforo,
 } from "../api/reservasApi.js";
 import { Notificacion } from "./Notificacion.jsx";
 import { ApiError } from "../api/ApiError.js";
@@ -33,6 +34,7 @@ export function Listadocharlas({
   const [reservasUsuario, setReservasUsuario] = useState(new Set());
   const [reservasUsuarioCargadas, setReservasUsuarioCargadas] = useState(false);
   const [cargando, setCargando] = useState(false);
+  const [reiniciandoAforo, setReiniciandoAforo] = useState(false);
 
   const cargarCharlas = async () => {
     setCargando(true);
@@ -158,6 +160,37 @@ export function Listadocharlas({
     }
   }
 
+  async function manejarReinicioAforo() {
+    const confirmado = window.confirm(
+      "Se cancelarán todas las reservas activas de todas las charlas. El historial se conservará. ¿Quieres continuar?",
+    );
+    if (!confirmado) return;
+
+    setReiniciandoAforo(true);
+    try {
+      const resultado = await resetAforo();
+      setReservasConteo(
+        Object.fromEntries(charlas.map((charla) => [charla.id_charla, 0])),
+      );
+      setReservasUsuario(new Set());
+      setNotificacion({
+        tipo: "exito",
+        mensaje: `Aforo reiniciado. Se cancelaron ${resultado.reservas_canceladas} reservas activas.`,
+      });
+    } catch (requestError) {
+      console.error("No se pudieron reiniciar los aforos:", requestError);
+      setNotificacion({
+        tipo: "error",
+        mensaje:
+          requestError instanceof ApiError
+            ? requestError.message
+            : "No se pudieron reiniciar los aforos. Inténtalo de nuevo.",
+      });
+    } finally {
+      setReiniciandoAforo(false);
+    }
+  }
+
   useEffect(() => {
     onStatusChange?.(estado);
   }, [estado, onStatusChange]);
@@ -255,6 +288,18 @@ export function Listadocharlas({
         >
           {cargando ? "⟳ Actualizando…" : "⟳ Actualizar"}
         </button>
+        {!soloReservadas &&
+          ["administrador", "organizador"].includes(
+            usuarioActual?.role?.nombre,
+          ) && (
+            <button
+              className="boton boton-reiniciar-aforo"
+              onClick={manejarReinicioAforo}
+              disabled={reiniciandoAforo}
+            >
+              {reiniciandoAforo ? "Reiniciando…" : "Vaciar aforos"}
+            </button>
+          )}
       </div>
       <div className="lista-charlas" aria-live="polite">
         {charlasMostradas.map((charla, indice) => {

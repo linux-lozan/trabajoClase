@@ -78,3 +78,16 @@ export async function cancelReservation(reservaId) {
     return true;
 }
 
+/** DELETE /reservas/aforo → cancel active reservations for all talks */
+export async function resetAforo() {
+    const response = await fetch(`${RESERVAS_URL}/aforo`, {
+        method: 'DELETE',
+        headers: {
+            Accept: 'application/json',
+            ...csrfHeaders(),
+        },
+    });
+
+    return readResponse(response);
+}
+

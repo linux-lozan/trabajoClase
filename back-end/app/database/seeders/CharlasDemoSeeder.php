@@ -11,8 +11,8 @@ use Illuminate\Database\Seeder;
 /**
  * Datos de demostración compartidos por todo el equipo.
  *
- * Se puede ejecutar tantas veces como haga falta: busca cada registro por un
- * campo identificativo y solo lo crea si no existe, así que no duplica filas.
+ * Se puede ejecutar tantas veces como haga falta: crea o actualiza las charlas
+ * de demo por título sin duplicarlas.
  */
 class CharlasDemoSeeder extends Seeder
 {
@@ -67,7 +67,7 @@ class CharlasDemoSeeder extends Seeder
                 'fecha' => '2026-12-01',
                 'hora_inicio' => '12:00:00',
                 'hora_fin' => '13:30:00',
-                'aforo_maximo' => 40,
+                'aforo_maximo' => 1,
                 'estado' => 'publicada',
             ],
             [
@@ -106,7 +106,7 @@ class CharlasDemoSeeder extends Seeder
             $sala = $salas[$datos['sala']];
             unset($datos['sala']);
 
-            Charla::firstOrCreate(
+            Charla::updateOrCreate(
                 ['titulo' => $datos['titulo']],
                 $datos + [
                     'id_organizador' => $organizador->id_usuario,

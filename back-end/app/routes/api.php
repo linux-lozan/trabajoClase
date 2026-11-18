@@ -15,6 +15,7 @@ Route::middleware('web')->group(function () {
     Route::post('/login', [AuthController::class, 'login'])->middleware('throttle:5,1');
     Route::get('/user', [AuthController::class, 'user'])->middleware('auth');
     Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth');
+    Route::delete('/reservas/aforo', [ReservaController::class, 'resetAforo'])->middleware('auth');
 });
 
 Route::apiResource('roles', RoleController::class);

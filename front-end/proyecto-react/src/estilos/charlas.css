@@ -71,6 +71,27 @@
     cursor: not-allowed;
 }
 
+.boton-reiniciar-aforo {
+    padding: 8px 14px;
+    border: 1px solid #b83b4b;
+    border-radius: 6px;
+    background: #fff;
+    color: #a52e3e;
+    font-size: .85rem;
+    font-weight: 600;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.boton-reiniciar-aforo:hover:not(:disabled) {
+    background: #fff0f1;
+}
+
+.boton-reiniciar-aforo:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
 .contenedor-carga-charlas {
     display: flex;
     flex-direction: column;
@@ -287,7 +308,8 @@
         justify-content: center;
     }
 
-    .boton-actualizar-lista {
+    .boton-actualizar-lista,
+    .boton-reiniciar-aforo {
         width: 100%;
         justify-content: center;
     }

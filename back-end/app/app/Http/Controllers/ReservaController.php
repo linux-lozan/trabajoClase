@@ -81,6 +81,18 @@ class ReservaController extends Controller
         return response()->noContent();
     }
 
+    public function resetAforo(Request $request)
+    {
+        if (! in_array($request->user()->role?->nombre, ['administrador', 'organizador'], true)) {
+            return response()->json(['message' => 'No tienes permiso para reiniciar los aforos.'], 403);
+        }
+
+        $reservasCanceladas = Reserva::whereIn('estado', ['pendiente', 'confirmada'])
+            ->update(['estado' => 'cancelada']);
+
+        return response()->json(['reservas_canceladas' => $reservasCanceladas]);
+    }
+
     /**
      * Obtener las reservas del usuario actual
      */
